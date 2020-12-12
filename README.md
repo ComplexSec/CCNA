@@ -210,3 +210,61 @@ Collision detection can function only when the devices do not attempt to transmi
 
 Hubs are restricted to half-duplex mode meaning they cannot transmit and receive at the same time
 
+## Bridges
+
+Bridges use the MAC address of data recipients to deliver frames. Bridges maintain a forwarding database in which the MAC addresses of the attached hosts are stored.
+
+When a packet is received by a bridge, the sender's MAC address is recorded in the forwarding database. If the address is also stored in the forwarding database, the packet will be sent directly to the recipient. If the address is not in the database, the packet is broadcast out all ports excluding the port it arrived on
+
+Each host receives the packet and uses the MAC address to determine if it is for them
+
+When the intended recipient responds to the packet, the bridge sends the reply directly to the original sender.
+
+Bridges can be used to increase the number of collision domains - each port on a bridge creates a separate collision domain. They do not create separate broadcast domains - all devices connected to a bridge will reside in the same broadcast domain
+
+## Switches
+
+Switches can be used to provide network connectivity to endpoint devices. They can operate at Layer 2 or Layer 3. Layer 2 switches function similiarly to bridges. Layer 3 switches add routing functionality
+
+Switches use information in the __data packet__ headers to forward packets to the correct ports. This results in fewer collisions, improved traffic flow and faster performance
+
+Switches break a large network into smaller networks. Switches perform __microsegmentation__ of collision domains - this creates a separate dedicated network segment for each port
+
+Layer 2 switches use physical addresses known as MAC addresses. They are used to carry out their primary responsibility of switching frames. Switches store known MAC addresses in a special area of memory known as the __Content Addressable Memory (CAM)__ table. The CAM table associates MAC addresses with the physical interface through which those addresses can be reached
+
+When a switch receives a frame, it adds the source MAC to the CAM table. The switch then checks the CAM table to see if the destination MAC address is listed. If it is, it directs the frame to the appropriate port. If not, it broadcasts the frame out all ports except the port it arrived on
+
+If 4 computers are connected to a switch, each computer will reside in its own collision domain. All 4 computers can send data to the switch simultaneously
+
+Because switches forward broadcasts, all devices connected to a Layer 2 switch will reside within a single broadcast domain. Layer 3 switches can use VLANs to separate the broadcast domains
+
+## Routers
+
+Routers are used to forward packets between computer networks. Routers create separate broadcast domains. Devices connected to a router reside in a separate broadcast domain. A broadcast that is sent on one network segment attached to the router will not be forwarded to any other network
+
+Layer 3 switches share many features and capabilities with routers
+
+Routers make path decisions based on logical addresses such as IP addresses. Routers store IP address information in a routing table. The routing table is stored in a special section of memory known as the __Ternary CAM (TCAM) table__. The TCAM table is used to provide wire speed access to data for queries. The TCAM table can provide a non-exact match for a particular query
+
+Routers can implement multiple TCAM tables - commonly used to facilitate the implementation of access control list (ACL) rules, Quality of Service (QoS) rules, etc...
+
+When a router receives a packet, it forwards the packet to the destination network based on information in a routing table. 
+
+If a router receives a packet that is destined for a remote network that is not listed in the table and neither a static default router nor a gateway of last resort has been configured, the packet is dropped and an ICMP Unreachable Error is sent to the interface it was received on
+
+## Servers
+
+Many different types of network servers and various functions associated with them. Servers can either be a specific piece of hardware or a software program - typically set up to provide specific services to a group of other computers on a network
+
+Servers provide a centralized way to control, manage and distribute a variety of technologies - simple data files, applications, security policies, network addresses
+
+Some examples of services include:
+
+Server | Description
+------------ | -------------
+File Servers | Can configure a file server to allow users to access shared files/folders, used as a central storage location
+Domain Servers | Manages resources that are available on the domain, used to configure access and security policies for users
+Print Servers | Provides access to a limited number of printers to many computer users rather than a local printer for each PC
+DHCP Servers | Automatically provide IP addresses to client computers, clients can connect to the server and automatically get an IP
+Web Servers | Allows customers to access your company website, typically contain content that is viewable in a browser
+Proxy Servers | Intermediary between browser and internet. When computers connect to the internet, the computer first connects to the proxy server. The proxy performs one of the following actions - forwards traffic, blocks traffic, returns cached webpage
