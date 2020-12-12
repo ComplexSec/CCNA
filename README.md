@@ -268,3 +268,41 @@ Print Servers | Provides access to a limited number of printers to many computer
 DHCP Servers | Automatically provide IP addresses to client computers, clients can connect to the server and automatically get an IP
 Web Servers | Allows customers to access your company website, typically contain content that is viewable in a browser
 Proxy Servers | Intermediary between browser and internet. When computers connect to the internet, the computer first connects to the proxy server. The proxy performs one of the following actions - forwards traffic, blocks traffic, returns cached webpage
+
+## Endpoints
+
+Endpoints are also known as hosts. Individual computing devices that access the services available on the network - could be a PC, PDA, laptop, thin client or terminal
+
+Endpoints act as the user interface at which the user can access the data or other devices available on a network
+
+## Next-Generation Firewalls and IPS Devices
+
+Firewalls are devices that filter packets inbound from untrusted networks. Typically a firewall filters packets without analysis
+
+Cisco Adaptive Security Appliances (ASAs) are next-generation, multifunction appliances that can provide firewall, virtual private network (VPN), intrusion prevention, and content security services
+
+An IPS is a device that detects and can automatically mitigate network intrusion attempts - can determine whether a given packet might be malicious and can take various actions
+
+## WAPs
+
+WAPs are devices that enable wireless clients to connect to a wireless LAN (WLAN) - using radio frequency (RF) communication
+
+WAPs are available in single-band or dual-band form. WAPs that are designed for modern versions of the IEEE 802.11 standard are typically dual-band WAPs
+
+One band operates at 2.4GHz frequency while the other operates at 5GHz frequency
+
+## Controllers
+
+Controllers manage other network devices - including Cisco DNA Controller and wireless LAN controllers (WLCs)
+
+Cisco DNA is a software-centric network architecture that uses a combination of Application Programming Interfaces (APIs) and a graphical user interface (GUI) to simplify network operations
+
+Cisco DNA Controller is the central component of a Cisco Software-Defined Access (SDA) network - Cisco SDA is a Cisco developed means of building local area networks (LANs) by using policies and automation
+
+Whereas autonomous WLANs required that each AP handle both traffic and management functions, Cisco Unified Wireless Networks use WLCs to centralize security configurations among APs and to provide mobility services at both Layer 2 and Layer 3
+
+WLCs provide user authentication, RF management, security and policy enforcement and QoS to lightweight APs (LAPs). A LAP requires a WLC to function
+
+If WLC becomes unavailable, the LAP will reboot and drop all client association until the WLC becomes available or until another WLC is found on the network
+
+A LAP communicates over Lightweight Access Point Protocol (LWAPP) to establish two tunnels to its associated WLC - one tunnel for data and one tunnel for control traffic. Traffic sent through data tunnel is not encrypted. Traffic sent through control tunnel is encrypted
