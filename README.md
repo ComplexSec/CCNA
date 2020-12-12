@@ -189,3 +189,24 @@ Protocols that operate at the Physical Layer include:
 * Ethernet
 * Universal Serial Bus (USB)
 * Asynchronous Digital Subscriber Line (ADSL)
+
+## Network Devices <a name="NET"></a> ([Back to Index](#INDEX))
+
+## Hubs
+
+Hubs are multiport physical repeaters that are used to connect end-user workstations. An incoming frame is rebroadcast out __all other ports__ except the port it came in on. They are inexpensive devices that do not create separate broadcast and collision domains
+
+Hubs do not make any forwarding decisions based on MAC address or IP address
+
+A collision domain is a network segment where collisions can occur when frames are sent among the devices on that network segment
+
+If 4 computers are connected to a hub, all 4 share the same bandwidth. Each device can only use a portion of the total bandwidth. Collisions can occur when frames are sent simultaneously by multiple computers attached to the hub
+
+Ethernet devices rely on __Carrier Sense Multiple Access with Collision Detection (CSMA/CD)__ to mitigate collisions
+
+With CSMA/CD a transmitting device listens on the network segment before it attempts to send data. If no transmissions are there, it sends data and listens to determine whether a collision occured. If a collision is detected, each transmitting device waits a random period of time before attempting to retransmit
+
+Collision detection can function only when the devices do not attempt to transmit and receive at the same time.
+
+Hubs are restricted to half-duplex mode meaning they cannot transmit and receive at the same time
+
