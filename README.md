@@ -76,3 +76,116 @@
 * Forward bits to the next hop in the network
 * Inlcudes protocols such as Ethernet, USB and ADSL
 * Information is called __bits__
+
+## Application Layer
+
+The Application Layer determines whether adequate resources exist for communication. It manages communications between apps and then directs data to the correct program
+
+This layer is also responsible for converting data into a format that is usable by apps and directing data to the proper app window. If multiple instances exist, the layer will ensure that data is delivered to the corect app instance
+
+Protocols used by the Application Layer include:
+
+Protocol | Description
+------------ | -------------
+HyperText Transfer Protocol (HTTP) | Transfer web pages over the internet
+File Transfer Protocol (FTP) | Transfer files over a network
+Trivial File Transfer Protocol (TFTP) | Transfer files over a network
+Dynamic Host Configuration Protocol (DHCP) | Assign IP addressing information to clients
+Domain Name System (DNS) | Translate host names to IPs
+Simple Mail Transfer Protocol (SMTP) | Send email messages
+Post Office Protocol (POP3) | Receive email messages
+Telnet | Create terminal connection to remote devices
+Secure Shell (SSH) | Create a secure remote terminal connection to networked device
+
+## Presentation Layer
+
+The Presentation Layer is responsible for converting and representing the payload in different formats - eg. data-based, character-based, image-based, audio-based, video-based and more
+
+Compression and encryption are often handled by this layer
+
+Some formats used by the Presentation Layer include:
+
+* Graphics Interchange Format (GIF)
+* Joint Photographic Experts Group (JPEG)
+* Motion Picture Experts Group (MPEG)
+* QuickTime
+
+## Session Layer
+
+The Session Layer is responsible for establishing, maintaining and terminating data communications between apps or devices
+
+Sessions are made up of requests and responses. The Session Layer identifies the data as belonging to a particular session and ensures that the requests and responses are sent back and forth between the two parties
+
+Protocols that operate at the Session Layer include:
+
+Protocol | Description
+------------ | -------------
+Password Authentication Protocol (PAP) | Authentication protocol that uses a simple user and password pair
+Remote Procedure Call (RPC) | Allows clients to initiate a process that is executed on a remote server
+
+## Transport Layer
+
+The Transport Layer is responsible for error-free delivery of information between devices. It is also repsonsible for flow control and sequencing. The information traversing the Transport Layer is called a __segment__
+
+Protocols that operate at the Transport Layer include:
+
+Protocol | Description
+------------ | -------------
+User Datagram Protocol (UDP) | Provides connectionless, unreliable data transfer between networked computers
+Transmission Control Protocol (TCP) | Provides connection-oriented, reliable data transfer between networked computers
+
+## Network Layer
+
+The Network Layer is responsible for logical addressing and routing on a network. Logical addressing methods include those defined by IPv4 and IPv6. The information traversing the Network layer is called a __packet__
+
+Examples of protocols that are used at this layer include:
+
+Protocol | Description
+------------ | -------------
+IPv4 | Used to uniquely identify devices on a network
+IPv6 | Used to uniquely identify devices on a network
+Open Shortest Path First | Link State-Routing Protocol
+Enhanced Interior Gateway Routing Protocol (EIGRP) | Cisco created hybrid routing protocol
+
+## Data Link Layer
+
+The Data Link layer defines how devices communicate over a network. It is responsible for managing physical addressing and switching on a network. Physical (MAC) addresses are handled here. Information traversing the Data Link layer is called a __frame__
+
+Data Link layer devices include switches and bridges
+
+Switching is handled at the Data Link layer because switches use physical addresses to forward packets to the correct port
+
+Some portions of the 802.11 wireless standard function at the Data Link layer and some portions at the Physical Layer
+
+Protocols that operate at the Data Link layer include:
+
+* Ethernet
+* Frame Relay
+* Point-to-Point Protocol (PPP)
+* Cisco Discovery Protocol (CDP)
+
+## Physical Layer
+
+The Physical Layer defines how bits are passed over a medium. They can be passed electronically, mechanically, optically or by radio signals
+
+Media can include:
+
+* Coaxial cable
+* Twisted-pair copper cable
+* Fiber-optic cable
+
+Physical layer includes the connectors used to connect the cables to the devices that operate at this layer. This layer passes bits between the Data Link layer and physical devices on a network
+
+Examples of devices that operate at this layer are:
+
+* Network Interface Cards (NIC)
+* Hubs
+* Repeaters
+
+The devices that operate at the Physical Layer receive and forward bits to other devices without making any path determination about the bits. The devices simply forward the bits to the next hop in the network
+
+Protocols that operate at the Physical Layer include:
+
+* Ethernet
+* Universal Serial Bus (USB)
+* Asynchronous Digital Subscriber Line (ADSL)
