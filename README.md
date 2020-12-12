@@ -1,1 +1,2 @@
-# Secure Systems Administration - Activities
+# CCNA 200-301 Resources
+
