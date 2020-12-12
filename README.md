@@ -23,42 +23,42 @@
 
 ## The OSI Model <a name="OSI"></a> ([Back to Index](#INDEX))
 
-#### Quick Summary
+### Quick Summary
 
-__Layer 7 - The Application Layer__
+<ins>Layer 7 - The Application Layer</ins>
 
 * Delivers appropriately formatted payloads to the correct instance of an application
 * Includes protocols such as HTTP, SMTP and DNS
 * Information is called __data__
 
-__Layer 6 - Presentation Layer__
+<ins>Layer 6 - Presentation Layer</ins>
 
 * Converts data into different formats
 * Compression and encryption handled here
 * Includes formats such as MP3, JPEG and GIF
 * Information is called __data__
 
-__Layer 5 - Session Layer__
+<ins>Layer 5 - Session Layer</ins>
 
 * Establishes and maintains communications
 * Includes protocols such as PAP and RPC
 * Uses requests and responses
 * Information is called __data__
 
-__Layer 4 - Transport Layer__
+<ins>Layer 4 - Transport Layer</ins>
 
 * Applies flow control and error detection and sequencing
 * Includes protocols such as TCP and UDP
 * Information is called __segments__
 
-__Layer 3 - Network Layer__
+<ins>Layer 3 - Network Layer</ins>
 
 * Responsible for logical addressing and routing
 * Includes devices such as routers and Layer 3 switches
 * Includes protocols such as IPv4, IPv6, IPX, OSPF and EIGRP
 * Information is called __packets__
 
-__Layer 2 - Data Link Layer__
+<ins>Layer 2 - Data Link Layer</ins>
 
 * Defines how devices communicate over a network
 * Responsible for managing physical addressing and switching (MAC addresses)
@@ -66,7 +66,7 @@ __Layer 2 - Data Link Layer__
 * Includes protocols such as Ethernet, Frame Relay, Token Ring, PPP and CDP
 * Information is called __frames__
 
-__Layer 1 - Physical Layer__
+<ins>Layer 1 - Physical Layer</ins>
 
 * Defines how bits are passed over a medium
 * Can be passed electronically, mechanically, optically or by radio signals
