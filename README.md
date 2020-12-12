@@ -23,7 +23,7 @@
 
 ## The OSI Model <a name="OSI"></a> ([Back to Index](#INDEX))
 
-### Quick Summary
+## Quick Summary
 
 <ins>Layer 7 - The Application Layer</ins>
 
