@@ -373,4 +373,53 @@ LAN or WLAN is connected to a service provider network typically over satellite,
 
 On-premise deployments involved purchasing, configuring and maintaining the deployment at the local level. The organization has full control over the network but it does increase the costs
 
-Cloud deploymentsn 
+Cloud deployments are owned/maintained by cloud hosting providers. The provider has control over both hardware and software. Some of the noted benefits are:
+
+* It has a lower upfront cost
+* No hiring or training is required
+
+There are also downsides which include:
+
+* Requires monthly usage fee
+* Less likely to offer an organization more customization and control
+
+Cloud deployments have decreased operational costs but can increase risks. When the internet service is interrupted, access to resources is also interrupted and confidential data might be stored on a third-party server
+
+The National Institute of Standards and Technology (NIST) defines three service models:
+
+1. Software as a Service (SaaS)
+2. Platform as a Service (PaaS)
+3. Infrastructure as a Service (IaaS)
+
+### Software as a Service (SaaS)
+
+SaaS enables a consumer to access applications that are running in cloud infrastructure - it does not enable the consumer to manage the cloud infrastructure or configure the provided apps
+
+SaaS exposes the least amount of consumer's network to the cloud and the least likely to require changes to the consumer's network design. A company uses SaaS when it licenses a service provider's office suite and email service and delivers it to end users through a browser
+
+SaaS providers use an Internet-enabled licensing function, a streaming service, or a web app to provide users with software that could otherwise be used locally
+
+Web-based email clients are examples of Saas including:
+
+* Microsoft Office 365
+* Google Drive
+* iCloud
+
+### Platform as a Service (PaaS)
+
+PaaS provides a consumer with a bit more freedom than SaaS - it enables the consumer to install and possibly configured provider-supported apps in the cloud infrastructure
+
+Companies that use a provider's deployment tools or API to deploy specific cloud-based applications or services is using PaaS. An organization could use a third party's MySQL database and Apache services to build a cloud-based customer relationship management platform (CRM)
+
+### Infrastructure as a Service (IaaS)
+
+IaaS provides the greatest degree of freedom by enabling a consumer to provision processing, memory, storage, and network resources within the cloud infrastructure. It also enables a consumer to install OSs and applications but cloud infrastructure remains under the control of the service provider
+
+Companies use IaaS when it hires a service provider to deliver cloud-based processing and storage that houses multiple physical or virtual hosts that can be configured in a variety of ways
+
+Suppose a company wants to establish a web server farm by configuring multiple Linux Apache MySQL PHP (LAMP) servers. The company could save hardware costs by virtualizing the farm and using a provider's cloud service to deliver the physical infrastructure and bandwidth for the virtual farm
+
+Control over the operating system, software and server configuration would remain the responsibility of the organization but control of the physical infrastructure and bandwidth would be the responsibility of the service provider
+
+Another example of IaaS is using a third party's infrastructure to host corporate DNS and DHCP servers
+
