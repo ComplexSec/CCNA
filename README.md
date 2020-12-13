@@ -306,3 +306,67 @@ WLCs provide user authentication, RF management, security and policy enforcement
 If WLC becomes unavailable, the LAP will reboot and drop all client association until the WLC becomes available or until another WLC is found on the network
 
 A LAP communicates over Lightweight Access Point Protocol (LWAPP) to establish two tunnels to its associated WLC - one tunnel for data and one tunnel for control traffic. Traffic sent through data tunnel is not encrypted. Traffic sent through control tunnel is encrypted
+
+## Cisco Three-Tier Network Design Model  <a name="THREE"></a> ([Back to Index](#INDEX))
+
+## The Core Layer
+
+The Core Layer provides the fastest switching path in the network. It is commonly referred to as the network backbone and is primarily associated with low latency and high reliability
+
+## The Distribution Layer
+
+The Distribution Layer provides router filtering and interVLAN routing. Management ACLs and IPS filtering is typically implemented at distribution layer. The Distribution layer also serves as an aggregration point for access layer network links
+
+Because the Distribution layer is the intermediary between the Access layer and Core layer, it is an ideal place to enforce security policies and perform tasks that involved packet manipulation. Summarization and next-hope redundancy are performed at this layer
+
+## The Access Layer
+
+The Access layer provides Network Admission Control (NAC) - NAC is a Cisco feature that prevents hosts from accessing the network if they do not comply with organizational requirements
+
+NAC Profiler automates NAC by automatically discovering and inventorying devices attached to the LAN
+
+This layer serves as a media termination point for servers and endpoints. The Access layer is an ideal place to perform user authentication and port security
+
+The Access layer typically consists of OSI Layer 2 switches only - when packets must be routed, it is first sent to a L3 device in the distribution layer. Some designs employ L3 switches in the access layer which moves the demarcation between L2 and L3 switching to the access layer
+
+## Cisco Two-Tier Network Design Model <a name="TWO"></a> ([Back to Index](#INDEX))
+
+This model is sometimes referred to as the Collapsed-Core Network Design Model. The functionality of the core layer is collapsed into the distribution layer. The functionality of the core layer is provided by the distribution layer and a distinct core layer does not exist
+
+The Distribution layer infrastructure must be sufficient to meet the design requirements
+
+## Spine-Leaf Topology <a name="SPINE"></a> ([Back to Index](#INDEX))
+
+Spine-Leaf topologies are generally seen in data centers more than organizations. Spine-Leaf topologies are two-tier, partial-mesh network architectures
+
+Every lower-tier leaf switch connects to every top-tier spine switch. Leafs and spines are not connected to one another
+
+Spine switches connect to the network backbone. If link oversubscription occurs, a new spine switch can be added and connections to every leaf switch can be established. Leaf switches connect to nodes such as servers. When port capacity becomes a problem with addition of new servers, a new leaf can be added and connections to every spine switch can be established
+
+Because spines have connections to every leaf, the scalability of the fabric is limited by the number of ports on the spine node and not by the number of ports on the leaf node
+
+Redundant connections between a spine and leaf pair are unnecessary because the nature of the topology ensures that each leaf has multiple connections to the network fabric - each spine requires only a single connection to each leaf node
+
+Spine and leaf nodes create a scalable network fabric that is optimized for east-west data transfer - typically traffic between an application server and its supporting data services (databases, file servers)
+
+Spine-leaf enables nonlocal traffic to pass from any ingress leaf interface to any egress leaf interface through a single, dynamically selected spine node
+
+Because every traffic flow must pass through no more than two network hops, throughput and latency become much more even and predictable
+
+## WAN Topologies <a name="WAN"></a> ([Back to Index](#INDEX))
+
+A WAN (Wide-Area Network) is a network that covers a large geographical area. A WAN is spread across multiple cities or countries for example the Internet
+
+Geographically dispersed LANs are typically connected together by a WAN. WAN connectivity is generally supplied by a service provider. Customers can connect LANs by tunneling traffic securely over the WAN, often via a site-to-site VPN. ISPs routers and switches are invisible to the customer LAN
+
+Older WAN technologies include T1 and T3 leased lines which provide point-to-point connectivity. Frame Relay and Asynchronous Transfer Mode (ATM) provide point-to-multipoint connectivity
+
+Newer WAN technologies include Multiprotocol Label Switching (MPLS) and Metro Ethernet
+
+## SOHO Topologies <a name="SOHO"></a> ([Back to Index](#INDEX))
+
+SOHO stands for Small Office/Home Office which is a small LAN or WLAN with one or more computers.
+
+LAN or WLAN is connected to a service provider network typically over satellite, Digital Subscriber Line (DSL), cable and fiber to the Internet. Satellite and DSL are older/slower technologies. Cable and fiber are faster technologies
+
+## On-Premises and Cloud Deployment <a name="ONPREM"></a> ([Back to Index](#INDEX))
