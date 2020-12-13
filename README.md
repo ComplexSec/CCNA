@@ -423,3 +423,186 @@ Control over the operating system, software and server configuration would remai
 
 Another example of IaaS is using a third party's infrastructure to host corporate DNS and DHCP servers
 
+## Interfaces and Cabling <a name="INTS"></a> ([Back to Index](#INDEX))
+
+Cisco routers support a variety of physical interfaces. Cisco offers fixed-configuration routers and modular routers. Fixed-configuration routers have limited number of integrated interfaces and do not support additional interfaces - makes them suite for SOHO implementations. Modular routers generally come with a small number of integrated LAN interfaces but offer expansion slots
+
+### Copper Cables
+
+Copper wires are used to transmit data as electrical signals. Ethernet, Token Ring, Copper Distributed Data Interface (CDDI) networks all use copper cabling to transmit data
+
+Most modern Ethernet networks use copper unshielded twisted-pair (UTP) cables. These cables are inexpensive, easy to install and support speeds of up to 1Gbps but should be no more than 100 meters in length. UTP cables are segregated into different category ratings
+
+Minimum rating of Cat3 is required to achieve a data transmission of up to 10Mbps - also known as 10BaseT Ethernet
+
+Minimum rating of Cat5 is required to achieve data of 100Mbps - known as Fast Ethernet or 10BaseTX Ethernet or 1Gbps which is known as Gigabit Ethernet or 1000BaseT Ethernet
+
+Coaxial cables support longer segment runs than UTP cables but most modern networks no longer use coaxial cables
+
+### Connecting UTP with RJ-45
+
+UTP cables contain 4 pairs of colour-coded wires:
+
+1. white/green and green
+2. white/blue and blue
+3. white/orange and orange
+4. white/brown and brown
+
+The 8 wires must be crimped into the 8 pins within an RJ-45 connector. The pins in the RJ-45 connector are arranged in order from left to right
+
+In a typical Ethernet or Fast Ethernet cabling scheme, the wires that are connected to Pins 1 & 2 transmit data and the wires connected to Pins 3 & 6 receive data
+
+Gigabit Ethernet transmits and receives data on all 4 pairs of wires
+
+There are 2 different Telecommunications Industry Association (TIA) wire termination standards for an RJ-45 connector - T568A & T568B
+
+The T568A standard is compatible with Integrated Services Digital Network (ISDN) cabling standards
+
+The T568B standard is compatible with a standard established by AT&T
+
+Wires used for transmit and receive in one standard are inverse in the other
+
+The T568A Standard:
+
+* uses the white/green and green wires for Pins 1 & 2
+* uses the white/orange and orange wires for Pins 3 & 6
+
+The T568B Standard:
+
+* uses white/orange and orange wires for Pins 1 & 2
+* uses white/green and green wires for Pins 3 & 6
+
+The white/blue and blue and white/brown and brown wires are typically connected to the same pin regardless of standard
+
+### Understanding Straight-Through and Crossover Cables
+
+There are times when you should use T568A on one side and T568B on the other side. A crossover cable uses a different standard at each end - used to connect two workstations, two switches, two routers over the same cable or any of the same two devices
+
+Dissimiliar Ethernet devices such as router and switch, switch and workstation must be connected with a straight-through Ethernet cable - uses the same pinout standard at each end
+
+If two dissimiliar devices are connected with a straight-through, the transmit pair on one end is connected to the receive pair on the other. If two similiar devices are connected with a straight-through, the transmit pins on one end are connected to the transmit pins on the other which means no communication
+
+Because Gigabit Ethernet uses all 8 wires of a UTP cable, the crossover pinout for a cable that is to be used over a Gigabit connection is slightly more complex than an inverse T568-standard
+
+In addition to inverting the transmit/receive wires, the white/blue and blue wires on one end should be inverse to the white/brown and brown wires on the other end
+
+### Serial Cables
+
+Serial cables are also copper cables but are not commonly used anymore. Most service provider equipment has transitioned to Ethernet and fibre-optic cables
+
+Cisco devices support five types of serial cables. Most commonly used serial cable is a 25-pin EIA/TIA-232 cable with a DB-25 conenctor at the end.
+
+One end of a serial cable is the Data Communications Equipment (DCE) end and the other is the Data Terminal Equipment (DTE) end. The DCE end provides clocking to the DTE end - if clock rate is not configured on the DTE end, physical connectivity cannot be established
+
+### Fibre-Optic Cables
+
+Fibre-optic cables transmit data as pulses of light. These cables are not susceptible to radio frequency interference (RFI) or electromagnetic interference (EMI)
+
+Implementing fibre-optic cables can be useful in buildings that contain sources of electrical or magnetic interferences. Fibre-optic cables are also useful for connecting buildings that are electrically compatible
+
+Fibre-optic supports greater bandwidth and longer segment distances - commonly used for network backbones and high-speed data transfer. They can be used to create Fibre Distributed Data Interface (FDDI) LANs - 100Mbps dual-ring LANs
+
+Cisco devices do not require fibre-optic cable connections to communicate with each other
+
+Fibre-optic cost a lot more than copper UTP, shielded twisted-pair (STP) or coaxial cables
+
+### Fibre-Optic Cable Types
+
+There are two main types of Fibre-Optic cables:
+
+1. Multimode Fibre (MMF)
+2. Single-Mode Fibre (SMF)
+
+<ins>__MultiMode Fibre__</ins>
+
+MMF can use a 62.5 micron core and wavelength of 850 nanometers. They are typically used for distances less than 2km
+
+When light is transmitted through a fibre-optic cable, light is only propogated by the fibre core at certain angles or modes. The light transmitted into the core of an MMF cable is typically in the 850-nm or 1300-nm frequency range
+
+Because MMF has a relatively large core that permits many different angles of light, the signal becomes dispersed over great distances - this dispersion effectively limits the usable distance of MMF to 2km
+
+MMF is typically used in campus designs that require at least 1Gbps of bandwidth and network runs that are less than 2km
+
+<ins>__Single-Mode Fibre__</ins>
+
+SMF typically uses a 9-micron core. Light transmitted into the core is typically in the 1310nm or 1350nm frequency range
+
+Because SMF has a small core that permits very few angles of light, the signal does not become very dispersed over great distances - enables network runs of 80km or more
+
+Typically used in campus designs that require at least 10Gbps of bandwidth and network runs that are greater than 2km
+
+### Fibre-Optic Cable Connections
+
+Older cables use ST and SC connectors. Older ST connector is round, spring-loaded connector. SC connector is square-shaped that snaps into its receptacle. SC is available in both single and duplex variables
+
+Newer fibre-optic cables can also use LC or MT-RJ connectors
+
+LC connectors are small form factor connectors that are available in both single and duplex varieties. They snap into their receptacle and are half the size of SC connectors
+
+MT-RJ connectors look like miniature RJ-45 Ethernet copper connectors. They provide duplex interface in a single connector
+
+### PoE
+
+PoE provides in-line power for connected IP phones and WAPs over the same cable that varries voice and data traffic. PoE eases VoIP and WLAN implementations because you are not limited to installing devices next to existing power sources - as long as there is a network jack, the device can draw power from the network cable
+
+A Cisco Catalyst switch can provide power to both Cisco and non-Cisco devices that support either IEEE 802.3af standard, the IEEE 802.3at standard or the Cisco prestandard method
+
+For a Catalyst switch to succesfully provide power, both the switch and device must support the same PoE method. After a common PoE method is determined, CDP messages are sent between Catalyst switches and Cisco devices can further refine the amount of allocated power
+
+802.3af standard divides power requirements into the following classes:
+
+* Class 0: 0.44 - 12.94W
+* Class 1: 0.44 - 3.83W
+* Class 2: 3.84 - 6.49W
+* Class 3: 6.49 - 12.95W
+
+Class 0 is the default PoE level - devices classified as such will draw as much power as they need
+
+The 802.3at PoE Plus standard adds a fourth class, Class 4, which is used for high-power PoE devices - class 4 provides 12.95W to 25.50W of power
+
+Cisco Catalyst switches monitor and police PoE ports. If a device attempts to draw more power than a port is configured to provide, a syslog message is issued and port shutdown and enters the error-disabled state
+
+## Troubleshooting Interfaces and Cabling <a name="TROUBLE"></a> ([Back to Index](#INDEX))
+
+### Excessive Noise
+
+Excessive Noise is a problem that can cause tranmissions errors. Noise errors are caused by a physical media problem. A damaged cable or wrong cable type could cause excessive noise errors to occur
+
+Excessive noise errors are detectable by viewing output from the __show interfaces__ command - a high number of Cyclic Redundancy Check (CRC) errors along with a low number of collisions can indicate noise issues
+
+NOTE: INSERT IMAGES
+
+### Collisions
+
+Too many collisions can cause network congestion due to packets being retransmitted as a result of the collisions
+
+Malfunctioning NICs in hosts can cause jabber on the network which causes collisions. Too many devices on one network can also cause collisions and duplex mismatch errors between devices can cause collisions
+
+Resolving collision errors may involve:
+
+* Replacing NICs in client computers
+* Creating additional network segments
+* Reconfigurating duplex settings
+
+Number of collisions that occur on an interface can be viewed using the __show interfaces__ command - high number of collisions could indicate transmission problems on the network
+
+NOTE: INSERT IMAGES
+
+### Late Collisions
+
+A late collision is a collision that occurs after the 512th bit (64th byte) of a frame that has been transmitted. The amount of time it takes to sends the first 512 bits of a frame is dependent on the network technology:
+
+* 51.2 microseconds to send 512 bits over a 10-Mbps Ethernet segment
+* 5.12 microseconds to send 512 bits over a 100-Mbps Ethernet segment
+
+Late collisions can occur as a result of:
+
+* Duplex mismatch errors
+* Network segment that extends farther than the cable length supports
+
+Number of late collisions that occur on an interface can be viewed via __show interfaces__ command - show under the late collisions counter
+
+NOTE: INSERT IMAGES
+
+### Duplex Mismatch
+
