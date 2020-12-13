@@ -25,6 +25,8 @@
 
 ## Quick Summary
 
+![](/images/osimodel.jpg)
+
 <ins>Layer 7 - The Application Layer</ins>
 
 * Delivers appropriately formatted payloads to the correct instance of an application
