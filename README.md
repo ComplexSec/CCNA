@@ -192,7 +192,7 @@ Protocols that operate at the Physical Layer include:
 
 ## Network Devices <a name="NET"></a> ([Back to Index](#INDEX))
 
-## Hubs
+### <ins>Hubs</ins>
 
 Hubs are multiport physical repeaters that are used to connect end-user workstations. An incoming frame is rebroadcast out __all other ports__ except the port it came in on. They are inexpensive devices that do not create separate broadcast and collision domains
 
