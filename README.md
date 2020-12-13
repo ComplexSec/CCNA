@@ -370,3 +370,7 @@ SOHO stands for Small Office/Home Office which is a small LAN or WLAN with one o
 LAN or WLAN is connected to a service provider network typically over satellite, Digital Subscriber Line (DSL), cable and fiber to the Internet. Satellite and DSL are older/slower technologies. Cable and fiber are faster technologies
 
 ## On-Premises and Cloud Deployment <a name="ONPREM"></a> ([Back to Index](#INDEX))
+
+On-premise deployments involved purchasing, configuring and maintaining the deployment at the local level. The organization has full control over the network but it does increase the costs
+
+Cloud deploymentsn 
