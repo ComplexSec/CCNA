@@ -77,7 +77,7 @@
 * Inlcudes protocols such as Ethernet, USB and ADSL
 * Information is called __bits__
 
-## Application Layer
+### <ins>Application Layer</ins>
 
 The Application Layer determines whether adequate resources exist for communication. It manages communications between apps and then directs data to the correct program
 
@@ -97,7 +97,7 @@ Post Office Protocol (POP3) | Receive email messages
 Telnet | Create terminal connection to remote devices
 Secure Shell (SSH) | Create a secure remote terminal connection to networked device
 
-## Presentation Layer
+### <ins>Presentation Layer</ins>
 
 The Presentation Layer is responsible for converting and representing the payload in different formats - eg. data-based, character-based, image-based, audio-based, video-based and more
 
@@ -110,7 +110,7 @@ Some formats used by the Presentation Layer include:
 * Motion Picture Experts Group (MPEG)
 * QuickTime
 
-## Session Layer
+### <ins>Session Layer</ins>
 
 The Session Layer is responsible for establishing, maintaining and terminating data communications between apps or devices
 
@@ -123,7 +123,7 @@ Protocol | Description
 Password Authentication Protocol (PAP) | Authentication protocol that uses a simple user and password pair
 Remote Procedure Call (RPC) | Allows clients to initiate a process that is executed on a remote server
 
-## Transport Layer
+### <ins>Transport Layer</ins>
 
 The Transport Layer is responsible for error-free delivery of information between devices. It is also repsonsible for flow control and sequencing. The information traversing the Transport Layer is called a __segment__
 
@@ -134,7 +134,7 @@ Protocol | Description
 User Datagram Protocol (UDP) | Provides connectionless, unreliable data transfer between networked computers
 Transmission Control Protocol (TCP) | Provides connection-oriented, reliable data transfer between networked computers
 
-## Network Layer
+### <ins>Network Layer</ins>
 
 The Network Layer is responsible for logical addressing and routing on a network. Logical addressing methods include those defined by IPv4 and IPv6. The information traversing the Network layer is called a __packet__
 
@@ -147,7 +147,7 @@ IPv6 | Used to uniquely identify devices on a network
 Open Shortest Path First | Link State-Routing Protocol
 Enhanced Interior Gateway Routing Protocol (EIGRP) | Cisco created hybrid routing protocol
 
-## Data Link Layer
+### <ins>Data Link Layer</ins>
 
 The Data Link layer defines how devices communicate over a network. It is responsible for managing physical addressing and switching on a network. Physical (MAC) addresses are handled here. Information traversing the Data Link layer is called a __frame__
 
@@ -164,7 +164,7 @@ Protocols that operate at the Data Link layer include:
 * Point-to-Point Protocol (PPP)
 * Cisco Discovery Protocol (CDP)
 
-## Physical Layer
+### <ins>Physical Layer</ins>
 
 The Physical Layer defines how bits are passed over a medium. They can be passed electronically, mechanically, optically or by radio signals
 
