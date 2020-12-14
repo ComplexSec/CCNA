@@ -1910,8 +1910,167 @@ Two main types of Hypervisors:
 
 Type 1 Hypervisors are implemented directly on the physical hardware without the need for an underlying OS whereas Type 2 Hypervisors run as privileged applications running on underlying OS
 
+A Type 1 Hypervisor runs directly on physical hardware. Because there is no underlying OS separating the hypervisor from physical hardware, Type 1 hypervisors are highly performant. Type 1 hypervisors are specialized to the requirements of the VMs that they will host.
+
+Type 1 Hypervisors offer a limited subset of capabilities beyond the functionality necessary to configure, provision and manage VMs. VMWare ESXi and Microsoft Hyper-V are examples of Type 1 hypervisors
+
+Type 2 Hypervisors run as privileged applications on an underlying OS. Additional layer of software prevents Type 2 hypervisors from being as performant as Type 1. Typically, the host OS does not support virtualization capabilities of the hypervisor by default - admins can install additional drivers to support the hypervisor and its virtualized resources
+
+Because a host running Type 2 is also running a complete OS, the host can provide additional processes and services beyond VM management. Oracle VirtualBox and VMware Fusion are examples of Type 2 hypervisors
+
 ## Network Virtualization <a name="NETVIRT"></a> ([Back to Index](#INDEX4))
+
+Network Virtualization can be used to emulate physical devices (switches, routers) in a topology. It can also be used to create new topologies by using network resources of an existing physical topology
+
+Virtual Switches (vSwitches) are used to interconnect VMs to each other and to devices outside their host
+
+Network Functions Virtualization (NFV) is used to create appliances such as firewalls and IDS that can perform the functions of their physical counterparts without being confined to a dedicated hardware platform
+
+Virtual LANs (VLANs), Virtual Routing and Forwarding (VRF) and Virtual Private Networks (VPNs) are all forms of network virtualization that use existing network topologies to create new virtual topologies
+
+<ins>Virtual Switches</ins>
+
+A vSwitch is a virtualized switch that emulates a physical Layer 2 switch. vSwitches are commonly used to connect VMs to each other and to the external, physical network
+
+vSwitches are similiar to VMs in that they are managed by a hypervisor and can interact with physical hardware only through capabilities of the hypervisor
+
+Common vSwitches are:
+
+* Cisco Nexu 1000VE
+* VMware vSphere Switch
+* Open vSwitch (OVS)
+
+<ins>Virtual Network Intefcaces vs Physical Network Interfaces</ins>
+
+A virtual NIC (vNIC) in a VM can be configured by the hypervisor to connect to a vSwitch. The vSwitch can then be connected to a physical NICE (pNIC) on the host to provide a connection to the physical network
+
+Although vSwitches can be connected to the vNICs of VMs without restriction, a vSwitch cannot share a connection to a pNIC with another vSwitch nor can two vSwitches be directly interconnected
+
+<ins>Network Function Virtualization</ins>
+
+NFV is a European Telecommunications Standard Institute (ETSI) standard architecture that recommends decoupling network functions from physical hardware devices by implementing software-based appliances similiar to VMs that are highly specific to their NFs
+
+A virtual network function (VNF) - virtualized NF - is implemented by an appliance and managed by a hypervisor
+
+Load balancers, intrusion detection systems, firewalls, wide area network optimizing and caching appliances are the most common VNFs
+
+Cisco offers a variety of VNFs including:
+
+* Cisco Cloud services Router 1000V (CSR 1000V)
+* Cisco NextGen Firewall Virtual Appliance (NGFWv)
+
+<ins>VLANs</ins>
+
+VLAN is a network virtualization mechanism that enables a single Layer 2 switch to function as multiple virtual switches
+
+Traffic within one VLAN is isolated from traffic in all other VLANs. For traffic to pass from one VLAN to another, a router is required or the switch must support interVLAN routing capabilities
+
+<ins>VRFs</ins>
+
+VRF is a network virtualization mechanism that enables a single Layer 3 router to function as multiple virtual routers. When you implement VRFs on a Cisco router, the router interfaces and routing tables associated with each VRF are isolated from other VRFs that have been configured on the router
+
+VRFs are conceptually similiar to VLANs in how they segment traffic on a physical deice into multiple virtual domains. When a VRF is implemented, the same IP addressing scheme can be appied to different routing tables on the same router
+
+VRFs can be used to create multiple network implementations that will use the same infrastructure and the same addressing scheme without causing addressing issues among the other instances
+
+<ins>VPNs</ins>
+
+VPN is a network virtualization mechanism that can create an overlay network on an existing network infrastructure. A VPN can be created to provide secure communications over an unsecure network such as Internet
+
+Because of the almost universal availability of low-cost, high-speed Internet connectivity, VPNs that use Internet for transport are often used to replace dedicated WAN services such as Frame Relay and point-to-point leased lines
+
+IPSec and SSL can be used to encrypt data over a VPN tunnel
 
 ## Container-Based Virtualization <a name="CONBAS"></a> ([Back to Index](#INDEX4))
 
+Container-Based Virtualization is an application virtualization mechanism that is similiar to a VM. Containers rely on a containerization engine - similiar to hypervisor - to configure/provision the virtual environment. A container bundles the binary files and libraries necessary to run the main app
+
+Additional resources such as config data and storage resources can be mapped into the container at runtime. Containers share the operating kernel with the rest of the processes on the host - the container itself is isolated
+
 ## Review Questions <a name="REV4"></a> ([Back to Index](#INDEX4))
+
+<ins>Review Question 1</ins>
+
+Which of the following hypervisors can run without an underlying OS?
+
+1. Only Type 1
+2. Only Type 2
+3. Both Type 1 and Type 2
+4. Neither Type 1 and Type 2
+
+<details><summary>Review Question 1 Answer</summary>
+<p>
+	
+The answer is __1__
+
+Explanation:
+
+Hypervisor is responsible for facilitating the interaction between physical and virtualized hardware. T1 are implemented directly on the physical hardware without an OS. T2 runs as a privilege app on an underlying OS
+
+</p>
+</details>
+
+<ins>Review Question 2</ins>
+
+Which of the following is a network virtualization technology that enables a router to create multiple, distinct routing tables?
+
+1. vSwitch
+2. VRF
+3. VLAN
+4. VPN
+
+<details><summary>Review Question 2 Answer</summary>
+<p>
+	
+The answer is __2__
+
+Explanation:
+
+VPN Routing and Forwarding (VRF) is a network virtualization mechanism that is used to maintain multiple independent routing tables on a single router. When VRF is used, the same IP addressing scheme can be applied to different routing tables on the same router. VRF can be used to create numerous VPNs that will use the same infrastructure and same addressing scheme without causing interference among other instances
+
+</p>
+</details>
+
+<ins>Review Question 3</ins>
+
+Which of the following statements is correct regarding containers and VMs?
+
+1. VMs are isolated from one another whereas containers are not
+2. VMs require a hypervisor whereas containers do not
+3. VMs share bins and libraries whereas containers do not
+4. VMs can have dedicated resources whereas containers cannot
+
+<details><summary>Review Question 3 Answer</summary>
+<p>
+	
+The answer is __2__
+
+Explanation:
+
+VMs require a hypervisor. A hypervisor is computer software, firmware or hardware that runs one or more VMs
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Module 5 - Switching and Network Access</summary>
+<p>
+
+# Table of Contents <a name="INDEX5"></a>
+
+1. [Summary](#SUMSWITCH)
+2. [Understanding Switching Fundamentals](#SWITCHFUN)
+3. [Switch Physical Interface Configuration](#INTCONFIG)
+4. [Understanding VLANs](#UNVLAN)
+5. [Common VLAN and Trunk Problems](#TRUNKPROB)
+6. [CDP AND LLDP](#CDP)
+7. [Understanding STP](#SPANTREE)
+8. [Understanding Cisco Implementations of STP](#CISTP)
+9. [Understanding EtherChannel](#CHUNKYBOI)
+10. [Review Questions](#REV5)
+
+![](/images/network3.png)
+
+## Summary <a name="SUMVIRT"></a> ([Back to Index](#INDEX4))
