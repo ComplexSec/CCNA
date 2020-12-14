@@ -958,17 +958,11 @@ IP addresses consist of two parts:
 * Network portion
 * Host portion
 
-1. Class A - start with 0
-2. Class B - start with 10
-3. Class C - start with 110
-4. Class D - start with 1110
-5. Class E - start with 1111
-
-1. Class A - first octet ranges from 1 through 127
-2. Class B - first octet ranges from 128 through 191
-3. Class C - first octet ranges from 192 through 223
-4. Class D - first octet ranges from 224 through 239
-5. Class E - first octet ranges from 240 through 255
+1. Class A - start with 0, first octet ranges from 1 through 127
+2. Class B - start with 10, first octet ranges from 128 through 191
+3. Class C - start with 110, first octet ranges from 192 through 223
+4. Class D - start with 1110, first octet ranges from 224 through 239
+5. Class E - start with 1111, first octet ranges from 240 through 255
 
 The following are valid IP addresses in each of the classes available for commercial use as defined by RFC 1918:
 
