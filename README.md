@@ -824,27 +824,315 @@ An interface status of up combined with a line protocol of down most likely indi
 
 ## Summary <a name="SUMMARY"></a> ([Back to Index](#INDEX))
 
+Addresses are used to send messages between communicating devices at Layer 2, Layer 3 and Layer 4 of the OSI model. Communication on Ethernet networks use 48-bit MAC addresses at Layer 2. MAC addresses are assigned by manufacturer and cannot typically be changed.
+
+IPv4 and IPv6 are predominantly used on Ethernet networks at Layer 3. IPv4 addresses have 32 bits and IPv6 addresses have 128 bits
+
+UDP and TCP port numbers are used to determine services at Layer 4. UDP is a connectionless protocol while TCP is a connection-oriented protocol
 
 ## Layer 2 Addressing <a name="L2ADD"></a> ([Back to Index](#INDEX))
 
+Layer 2 addresses are created and assigned to devices when the device is manufactured. They have a combination of a manufacturing code assigned by the IEEE and a unique code to each unit.
+
+The addresses are encoded in the hardware of each device commonly referred to as Burned In Addresses (BIA) and cannot be changed. Many devices allow the user to configure an alternate address in addition to the BIA. The Layer 2 address is part of each physical device
+
+### Ethernet Overview
+
+When two devices send data simultaneously, a collision occur - both devices wait a random amount of time before attempting to resend,  When many devices are connected to one or more hubs to form a large collision domain, collisions are more likely to occur. Switches divide collision domains so collisions are less likely to occur
+
+Full-duplex Ethernet networks do not use any method to control media access - devices configured for full-duplex operation can simultaneously send and receive data. Because Full-duplex devices can send data as soon as they are ready, CSMA/CD is not required
+
+Switches are capable of full or half duplex operations while hubs can only operate in half duplex mode
+
+### Ethernet Frames
+
+An Ethernet Frame typically consists of seven fields in the following order:
+
+1. A 7-byte preamble field
+2. A 1-byte start-of-frame (SOF) field
+3. A 6-byte destination address field
+4. A 6-byte source address field
+5. A 2-byte type field
+6. A data field in the range from 46 through 1500 bytes
+7. A 4-byte Frame Check Sequence (FCS) field
+
+The first 5 fields are known as the __Ethernet Header__
+
+The __Preamble__ field is used to notify receiving hosts that a frame is being sent
+The __SOF__ field is used for synchronization with other hosts on the LAN
+The __Destination Address__ field contains the MAC address of the host which the data is intended for
+The __Source Address__ field contains the MAC address of the host sending the data
+
+The major difference between an Ethernet header and an 802.3 header is the 2-byte field that ends each header. An Ethernet header contains a 2-byte length field that stores the number of bytes that are contained in the frame's data field. An 802.3 header uses a type field to indicate the protocol that is intended to receive the frame's data after processing
+
+In both Ethernet and 802.3 frame formats, a __payload__ field of a size in the range from 46 to 1500 bytes follow the header. An 802.3 frame stores both an 802.2 header and its payload in that field. An Ethernet frame contains only the payload in the equivalent field
+
+Both 802.3 and Ethernet frames end with an FCS field. The FCS field is a 4-byte cyclic redundancy check (CRC) that is intended to enable a frame's receiver to determine whether the frame has been corrupted in transit - the FCS is calculated based on the value of every other field in the frame
+
+### MAC Addresses
+
+MAC addresses are written in hexadecimal format. A MAC address is composed of six 8-bit octets or bytes for a total of 48 bits of data in the entire address.
+
+The most significant bytes are at the beginning and are transmitted first. Bytes decrease in significance as you move through the address to the least significant octet at the end.
+
+The first three octets represent the Organizationally Unique Identifier (OUI) which is assigned by the IEEE to identify the manufacturer. The last three octets represent the unique NIC-specific identifier assigned to the device
+
+The significance of each octet follows the same rule of the overall address - most significant bit on the left, least significant bit on the right. When transmitted, a bit differs from a byte in that the least significant bit of a byte is transmitted first
+
+The two least significant bits of the most significant byte of a MAC address are used as indicator flags. The least significant bit of the most significant byte is where a MAC address is designated as __unicast__ or __multicast__ - 0 means unicast and 1 means multicast
+
+The second least significant bit is used to designate whether the MAC address is globally administered by IEEE and carries an OUI or is locally administered - O means OUI and 1 means Locally Administered
 
 ## Layer 3 Addressing <a name="L3ADD"></a> ([Back to Index](#INDEX))
 
+Layer 3 addresses are assigned to devices that use IP to exchange data on a network. IP is a route protocol
+
+Routed protocols define the way information is packaged and sent from one network to another. They do not determine the path from source to destination - that is handled by routing protocols. Routed protocols simply address the packet of information and allow the routing protocols to determine the path
+
+The purpose of Layer 3 addresses is to pinpoint the location of a device in the network. Layer 3 addresses assigned by network administrators to a particular device. Addresses can be reused when a device is upgraded or removed
+
+There are two categories of IP addresses:
+
+* Public
+* Private
+
+Public IPs are globally unique addresses that are assigned by IANA to large companies and ISPs. Private IPs are locally unique addresses that are not routable over public networks but are used in internal networks
+
+### IPv4 Overview
+
+IPv4 supports:
+
+* Unicast
+* Multicast
+* Broadcast
+
+A basic IPv4 header without options is 20 octets - 20 bytes or 160 bits. The header contains the following:
+
+* Version - 4 bit field specifying IP version (v6 or v4)
+* IP Header Length (IHL) - 4 bit field specifying number of 32-bit sections (words) in the header
+* Type of Service - 9 bit field indicating the importance of a packet by specifying the quality of service desired
+* Total Length - 16 bit field indicating number of bytes/octets in entire IP packet
+* Identification - 16 bit field identifying the current packet and used to reassemble packet fragments
+* Flags - 3 bit field used to control fragmentation
+* Fragment Offset - 13 bit field indicating the position of data in a fragmented paccket so reassembled correctly
+* Time To Live (TTL) - 8 bit field acting as countdown timer and discarded when it reaches zero
+* Protocol - 8 bit field specifying upper-layer protocol that should process the packet after IP processing
+* Header Checksum - 16 bit field used to verify the integrity of the IP header
+* Source Address - 32 bit field specifying source IP
+* Destination Address - 32 bit field specifying destination IP
+* Options - variable length field that specifies other assorted IP options such as security and source routing parameters
+
+Data is part of the IP packet but not part of the header
+
+Because an IP is a 32 bit number, the range of possible values is limited to 2^32 unique addresses - some IP ranges are set aside for specific purposes
+
+<ins>Loopback Addresses</ins>
+
+All addresses in the 127.0.0.0/8 network are reserved for testing purposes
+
+<ins>Private IP Addresses</ins>
+
+10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16 are not routable across the Internet but NAT can be used to translate private IPs to public IPs
+
+<ins>Automatic Private IP Addresses (APIPA)</ins>
+
+169.254.0.0/16 addresses are __link-local__ private addresses randomly generated when client cannot obtain IP via DHCP
+
+<ins>Multicast Addresses</ins>
+
+224.0.0.0/4 addresses are used to send a single stream of data to multiple devices
+224.0.0.1 multicast address is the all hosts address (sends multicast to all hosts on a subnet)
+
+<ins>Global Broadcast Address</ins>
+
+255.255.255.255 is used to send data to every computer on a network or subnet
+
+### Classful Networks
+
+Classes A, B and C are available for commercial use
+Class D addresses are used for multicast traffic
+Class E addresses are reserved for experimental purposes only
+
+IP addresses consist of two parts:
+
+* Network portion
+* Host portion
+
+Class A - start with 0
+Class B - start with 10
+Class C - start with 110
+Class D - start with 1110
+Class E - start with 1111
+
+Class A - first octet ranges from 1 through 127
+Class B - first octet ranges from 128 through 191
+Class C - first octet ranges from 192 through 223
+Class D - first octet ranges from 224 through 239
+Class E - first octet ranges from 240 through 255
+
+The following are valid IP addresses in each of the classes available for commercial use as defined by RFC 1918:
+
+* Class A 10.0.0.0 through 10.255.255.255
+* Class B 172.16.0.0 through 172.31.255.255
+* Class C 192.168.0.0 through 192.168.255.255
+
+### Subnetting
+
+Subnetting is a technique used to divide a network into smaller subnets. All devices on a network that belong to a given subnet have a common number in the network portion and a unique host.
+
+The following list displays the most commonly used subnet mask conversions
+
+* /8 = 255.0.0.0
+* /16 = 255.255.0.0
+* /17 = 255.255.128.0
+* /18 = 255.255.192.0
+* /19 = 255.255.224.0
+* /20 = 255.255.240.0
+* /21 = 255.255.248.0
+* /22 = 255.255.252.0
+* /23 = 255.255.254.0
+* /24 = 255.255.255.0
+* /25 = 255.255.255.128
+* /26 = 255.255.255.192
+* /27 = 255.255.255.224
+* /28 = 255.255.255.240
+* /29 = 255.255.255.248
+* /30 = 255.255.255.252
+
+Subnetting and route summarization can work together so that a network can efficiently use registered IP addresses and so that the routers are able to minimize routing table information and routing update traffic
+
+Route summarization enables a router to advertise multiple contiguous subnets as a single larger subnet. Summarization combines several smaller subnets into one large subnet
+
+Route summarization is most efficient when subnets can be summarized within a single subnet boundary and are contiguous - all of the subnets are consecutive
+
+For example, if a router is connected to:
+
+* 123.45.67.64/30
+* 123.45.67.68/30
+* 123.45.67.72/30
+* 123.45.67.76/30
+
+This can be summarized as a contiguous network and advertised as the 123.45.67.64/28 subnet
+
+### Automatic IP Address Configuration
+
+IPv4 addresses and subnet masks can be:
+
+* Manually configured
+* Automatically assigned by a DHCP server
+* Automatically assigned to a host by itself
+
+Very small networks can be easily managed by an administrator who manually allocates IP addresses to devices as needed but DHCP configuration makes more sense for networks in which manual assignment could produce significant admin overhead
 
 ## Differences Between IPv4 and IPv6 <a name="DIFF46"></a> ([Back to Index](#INDEX))
 
+IPv6 offers several improvements over IPv4:
+
+* Simplified header
+* Native IP Security protocol support 
+* Improved route aggregration
+
+IPv6 offers all of the following features:
+
+* Uses a 128 bit address space (more unique addresses for future expansion)
+* Automatically configures addresses usign ICMPv6 or DHCPv6
+* Does not require NAT and PAT in order to converse addresses
+* Native implements IPSec
+* Relies on Transport layer protocols instead of header checksums for data integrity
+* More efficient route aggregration by using multiple prefixes
 
 ## Differences Between IPv4 and IPv6 Headers <a name="DIFFHEADERS"></a> ([Back to Index](#INDEX))
 
+An IPv4 header contains the following fields:
+
+* Version - 4 bit field specifying IP version (v6 or v4)
+* IP Header Length (IHL) - 4 bit field specifying number of 32-bit sections (words) in the header
+* Type of Service - 9 bit field indicating the importance of a packet by specifying the quality of service desired
+* Total Length - 16 bit field indicating number of bytes/octets in entire IP packet
+* Identification - 16 bit field identifying the current packet and used to reassemble packet fragments
+* Flags - 3 bit field used to control fragmentation
+* Fragment Offset - 13 bit field indicating the position of data in a fragmented paccket so reassembled correctly
+* Time To Live (TTL) - 8 bit field acting as countdown timer and discarded when it reaches zero
+* Protocol - 8 bit field specifying upper-layer protocol that should process the packet after IP processing
+* Header Checksum - 16 bit field used to verify the integrity of the IP header
+* Source Address - 32 bit field specifying source IP
+* Destination Address - 32 bit field specifying destination IP
+* Options - variable length field that specifies other assorted IP options such as security and source routing parameters
+
+An IPv6 header exists in two forms:
+
+* Main Header (similiar to IPv4 header)
+* Extensions Header
+
+The IPv6 Main Header contains the following fields:
+
+* Version - same name and function as IPv4 header field
+* Traffic Class - functions the same as the IPv4 Type of Service field
+* Flow Label - new IPv6 Main Header field used to label packets for special handling
+* Payload Length - functions the same as the IPv4 Total Length field
+* Next Header - functions the same as the IPv4 Protocol field
+* Hop Limit - functions the same as the IPv4 TTL field
+* Source Address - same as IPv4 header
+* Destination Address - same as IPv4 header
 
 ## IPv6 Address Composition <a name="IPV6COMP"></a> ([Back to Index](#INDEX))
 
+IPv6 address consists of 32 hexadecimal characters representing a 128 bit binary value. IPv6 addresses can be separated into eight 4 character quartets separated by colons
+
+Each hexadecimal character in a quartet represents a 4 bit binary value and each quartet in an IPv6 address could be expressed as 16 binary digits
+
+### Abbreviating IPv6 Addresses
+
+You can omit the leading zeroes in each quartet of an IPv6 address. For example:
+
+	The address 0001:0003:0003:0040:0050:0066:0777:0ABC can become 1:2:3:40:50:66:777:ABC
+
+However, you cannot remove trailing zeroees as that would change the value of the quartet
+
+You can also abbreviate IPv6 addresses by representing either a single quartet or consecutive quartets of all zeroes as a double colon. For example:
+
+	The address 1234:5678:0000:0000:0000:0000:0000:9ABC can become 1234:5678::9ABC
+
+You can only use the double colon abbreviation once in an IPv6 address -if multiple sets of zeroes are present the longest set should be replaced
 
 ## IPv6 Prefixes <a name="IPV6PREFIX"></a> ([Back to Index](#INDEX))
 
+IPv6 addresses consist of two distinct segments:
+
+* Prefix
+* Interface ID
+
+The Prefix is the __network portion__ of the address
+The Interface ID is the  __host portion__ of the address
+
+Because IPv6 is large, some IPv6 prefixes can contain multiple subprefixes which are similiar to IPv4 subnets - subprefixes can make route aggregration simpler
+
+Route Aggregration is the process of grouping routes with common addresses together under a single prefix to minimize the size of a routing table and increase router efficiency
 
 ## IPv6 Address Types <a name="IPV6TYPES"></a> ([Back to Index](#INDEX))
 
+IPv4 uses three types of address:
+
+* Unicast
+* Multicast
+* Broadcast
+
+IPv6 also uses unicast and multicast and work similiar but IPv6 does not use broadcast addresses
+
+IPv6 uses __Anycast__ addresses which are not available in IPv4. Functions that were performed by broadcast in IPv4 are performed by multicast and anycast in IPv6
+
+Multicast addresses in IPv6 work similiarly to IPv4 - they are used to send packets to multiple devices that are configured with that multicast address
+
+The following table shows common IPv4 multicast addresses and their respective IPv6 multicast addresses:
+
+Multicast Address | IPv4 | IPv6
+------------ | ------------- | -------------
+All Hosts | 224.0.0.1 | FF02:0:0:0:0:0:0:1
+All Routers | 224.0.0.2 | FF02:0:0:0:0:0:0:2
+All OSPF Routers | 224.0.0.5 | FF02:0:0:0:0:0:0:5
+All OSPF DRs | 224.0.0.6 | FF02:0:0:0:0:0:0:5
+All RIP Routers (except RIPv1) | 224.0.0.9 | FF02:0:0:0:0:0:0:9
+All EIGRP Routers | 224.0.0.10 | FF02:0:0:0:0:0:0:A
 
 ## Global Unicast Addresses and Route Aggregration <a name="GLOBUNI"></a> ([Back to Index](#INDEX))
 
