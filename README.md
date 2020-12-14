@@ -731,7 +731,7 @@ Network Layer troubleshooting might involve the examination of routing tables an
 
 ## Review Questions <a name="REV1"></a> ([Back to Index](#INDEX))
 
-<ins>Review Queston 1</ins>
+<ins>Review Question 1</ins>
 
 How do spines and leafs connect in a spine-leaf topology?
 
@@ -752,7 +752,7 @@ In a spine-leaf topology, each leaf must connect to every spine. In addition, ea
 </p>
 </details>
 
-<ins>Review Queston 2</ins>
+<ins>Review Question 2</ins>
 
 Which of the following cloud computing service models provides the least management control to the consumer?
 
@@ -772,7 +772,7 @@ SaaS is the cloud computing service model that provides the least management con
 </p>
 </details>
 
-<ins>Review Queston 3</ins>
+<ins>Review Question 3</ins>
 
 An interface has a status of up combined with a line protocol status of down. At which of the following layers does the problem most likely exist?
 
@@ -866,7 +866,7 @@ An interface status of up combined with a line protocol of down most likely indi
 
 ## Review Questions <a name="REV2"></a> ([Back to Index](#INDEX))
 
-<ins>Review Queston 1</ins>
+<ins>Review Question 1</ins>
 
 Which of the following is the OUI in the MAC address 22:44:66:88:AA:CC?
 
@@ -887,7 +887,7 @@ The OUI in the MAC address 22:44:66:88:AA:CC is 22:44:66. MAC addresses are 48 b
 </p>
 </details>
 
-<ins>Review Queston 2</ins>
+<ins>Review Question 2</ins>
 
 Which of the following is an IPv4 address that can be routed over the Internet?
 
@@ -914,7 +914,7 @@ The address 172.32.1.1 is an IPv4 address that can be routed over the Internet. 
 </p>
 </details>
 
-<ins>Review Queston 3</ins>
+<ins>Review Question 3</ins>
 
 Which of the following IPv6 prefixes is used for unique local unicast addresses?
 
