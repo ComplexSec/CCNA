@@ -802,7 +802,26 @@ An interface status of up combined with a line protocol of down most likely indi
 
 ## NOTE: This module skips over some subnetting information as it is assumed you know it by now. If you need a refresher, please click [here](https://www.google.com)
 
+# Table of Contents <a name="INDEX"></a>
+
+1. [Summary](#SUMMARY)
+2. [Layer 2 Addressing](#L2ADD)
+3. [Layer 3 Addressing](#L3ADD)
+4. [Differences Between IPv4 and IPv6](#DIFF46)
+5. [Differences Between IPv4 and IPv6 Headers](#DIFFHEADERS)
+6. [IPv6 Address Composition](#IPV6COMP)
+7. [IPv6 Prefixes](#IPV6PREFIX)
+8. [IPv6 Address Types](#IPV6TYPES)
+9. [Global Unicast Addresses and Route Aggregration](#GLOBUNI)
+10. [EUI-64 Interface IDs](#EUI64ID)
+11. [Stateful and Stateless Address Configuration](#STATEADD)
+12. [Using IPv6 in an IPv4 World](#IPV4WORLD)
+13. [Verifying Layer 3 Addressing](#VERL3)
+14. [Layer 4 Addressing](#L4ADDRESSING)
+15. [Review Questions](#REV2)
+
 ![](/images/network2.jpg)
+
 
 
 
