@@ -1,1 +1,1 @@
-# Secure Systems Administration - Activities
+CCNA Lab Exercises
