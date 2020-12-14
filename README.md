@@ -1622,8 +1622,191 @@ Gaps between these ranges are allocated for other purposes. Works is underway to
 
 Unlike chanels in the 2.4GHz band, channels in the 5GHz band do not intefere with each other. More devices use the 2.4GHz band than a 5GHz band. A device that uses 5GHz band is less likely to encounter interference than a device using 2.4GHz band
 
+## Wireless Standards <a name="WSTANS"></a> ([Back to Index](#INDEX3))
+
+The original 802.11-1997 WLAN standard was released by IEEE in 1997. It operates at 2.4GHz band and has a maximum data throughput of 2Mbps
+
+The 802.11b, 802.11a, 802.11g, 802.11n and 802.11ac WLAN standards are amendments to the original. They were subsequently released by the IEEE. The 802.11ax specification is expected to become standard in late 2020
+
+802.11a and 802.11b standards were both introduced in 1999. The 802.11a standard operates in 5GHz band and has a maximum data throughput of 54Mbps. The 802.11b standard operates in 2.4GHz band and has a maximum data throughput of 11Mbps. Although 802.11a transmits data more efficiently than 802.11b, the 802.11b standard was more widely accepted
+
+The 802.11g standard was introduced in 2003. It operates in the 2.4GHz band and can coexist with 802.11b devices. It transmits data at speeds similiar to 802.11a
+
+The 802.11n standard was introduced in 2009. It operates in both the 2.4GHz band and the 5GHz band. It has added support for Multiple Input, Multiple Output (MIMO) and channel bonding
+
+MIMO uses multiple antennas in concert to increase transmission speeds whereas Channel Bonding increases transmission speeds by allowing multiple interfaces to work together. Both technologies boost the maximum data rate of 802.11n to 600Mbps
+
+The 802.11ac was introduced in 2013. It operates in the 5GHz band and has added support for multi-user MIMO (MU-MIMO) and extended channel bonding. It also increases the transmission speeds to 6.93Gbps
+
+The 802.11ax draft specification operates in 2.4GHz and 5GHz bands at four times the data transmission rate of 802.11ac. It applies improved power-control methods to control interference and reduce power consumption. Typically labelled as Wi-Fi 6
+
 ## Associating with an AP <a name="ASSAP"></a> ([Back to Index](#INDEX3))
+
+Wireless clients must associate with an AP before the AP will allow communication. The wireless client must be configured with the appropriate Service Set Identifier (SSID) for the network - the SSID identifies the name of the wireless network to which a device belongs
+
+You should never use the default SSID when you configure an AP and you should also change the default administrative password
+
+You can configure an AP to broadcast the SSID within beacon frames and can disable SSID broadcasts to hide the SSID
+
+When SSID broadcasts are disabled, you must manually configure each wireless client with the correct SSID. The wireless client must use the same SSID to communicate with the AP
+
+In order to associate with an AP, the wireless client must also be configured with the appropriate security protocol and authentication. If wireless AP is configured to encrypt traffic by using WPA, the client must also use WPA
+
+<ins>Open Authentication and WEP</ins>
+
+The original 802.11 standard included two authentication methods:
+
+* Open Authentication
+* Wired Equivalent Privacy (WEP)
+
+WEP is extremely weak encryption method that uses RC4 algorithm. WEP keys are easily cracked due to a short 24-0bit initialization vector (IV)
+
+The IV value is added to a 40-bit WEP key to provide 64-bit encryption and is added to a 104-bit WEP key to provide 128-bit encryption
+
+Because IV is sent as clear text, the IV can be intercepted and used to decrypt packets or used for IV replay attacks
+
+WEP is also subject to bit-flipping attacks which exploit a weakness in the Integrity Check Value (ICV). WEP supports only static, preshared keys
+
+<ins>WPA</ins>
+
+Wi-Fi Alliance developed WPA to address significant security weaknesses in the WEP protocol. WPA was only intended as an interim solution until the IEEE 802.11i standard was certified and implemented
+
+WPA uses Temporal Key Integrity Protocol (TKIP) for encryption. Stronger encryption algorithm than WEP. TKIP provides security features such as:
+
+* Key Hashing
+* Messages Integrity Check
+* Long IV
+
+Keys used by TKIP can change dynamically which increase wireless network security. TKIP provides 128-bit encryption
+
+WPA supports 802.1x and Extensible Authentication Protocol (EAP) based authentication methods. EAP is an authentication framework that can be used for point-to-point connections and for wired/wireless links
+
+<ins>WPA2</ins>
+
+WPA2 was created by the Wi-Fi Alliance as an improvement to the original WPA standard. It fully implements the 802.11i standard
+
+WPA2 uses Advanced Encryption Standard (AES) Counter Mode with Cipher Block Chaining Message Authentication Code Protocol (CCMP) for data encryption. AES-CCMP provides much stronger encryption and supports key length of up to 256 bits. WPA2 supports 802.1x and EAP-based authentication methods
+
+<ins>WPA3</ins>
+
+WPA3 was introduced in 2018 to address weaknesses in WPA2. WPA3 improves encryption by introducing support for AES-Galois/Counter Mode Protocl (AES-GCMP). WPA3-Personal Mode still supports using AES-CCMP at a minimum
+
+WPA3 standard introduces support for Protected Management Frames (PMF) which secures management frame communication between AP and clients
+
+WPA3 also supports 802.1x and EAP-based authentication protocols
+
+<ins>802.1x</ins>
+
+802.1x is a port-based authentication standard that defines the roles and procedures used to authenticate devices. 802.1x uses EAP to provide authentication services for devices requesting network access
+
+802.1x defines the three roles that constitute the authentication framework:
+
+* Supplicant
+* Authenticator
+* Authentication Server
+
+The Supplicant is an EAP-compatible wireless client that requests access to a network. Before access is granted, the supplicant must provide valid credentials to the authenticator
+
+The Authenticator is an EAP-compatible AP or switch that forwards the credentials to an authentication server for approval
+
+The Authentication server is an Authentication, Authorization and Accounting (AAA) enabled computer such as Remote Authentication Dial-In User Service (RADIUS) that possesses a database of users approved for network access and their applicable permission levels
+
+Once authentication server has verified the identity of the the supplicant, the server informs the authenticator whether access is granted or denied
 
 ## 802.11 MAC Frames <a name="MACFRA"></a> ([Back to Index](#INDEX3))
 
+An IEEE 802.11 MAC frame is generally compromised of nine fields:
+
+* Frame Control
+* Duration
+* ADD1, ADD2, ADD3, ADD4
+* Sequence
+* Data
+* Frame Check Sequence
+
+<ins>Frame Control (FC)</ins>
+
+FC is used to identify the type of 802.11 frame and its 2 bytes of data are subdivided into 11 related fields of information - such as wireless protocol, frame type, frame subtype
+
+<ins>Duration (DUR)</ins>
+
+DUR is a 2 byte field that is used mainly by control frames to indicate transmission timers. It is also used by the Power Save (PS) Poll control frame to indicate the associaton identity (AID) of a client
+
+<ins>ADD1, ADD2, ADD3 and ADD4</ins>
+
+These are 6 byte fields used to convey MAC addresses and Basic Service Set Identifier (BSSID) information. What information resides in which address field is dependent on the type of frame.
+
+ADD1, ADD2 and ADD3 typically contain a source MAC address, destination MAC address, and BSSID with the order being dependent on whether the frame is entering the distribution system (DS), leaving the DS or passing directly between ad-hoc wireless devices
+
+<ins>Sequence (SEQ)</ins>
+
+2 byte field that is subdivided to store two related pieces of information of each frame - fragment number and sequence number
+
+<ins>Data</ins>
+
+The Data field varies in size and contains the frame's payload. For data frames, the payload is user data. For other frames such as management frames, it might contain information such as supported data rates and cipher suites
+
+<ins>Frame Check Sequence (FCS)</ins>
+
+The FCS is a 4 byte cyclic redundancy check (CRC) value calculated from all the 802.11 header fields including data portion of the frame
+
+The value is used by receiving station to determine whether the frame was corrupted during transit 
+
 ## Review Questions <a name="REV3"></a> ([Back to Index](#INDEX3))
+
+<ins>Review Question 1</ins>
+
+Which of the following channels in the 2.4GHz band should you use within the United States?
+
+1. 1, 2 and 3
+2. 1, 6 and 11
+3. 1, 7 and 13
+4. 2, 7 and 12
+
+<details><summary>Review Question 1 Answer</summary>
+<p>
+	
+The answer is __2__
+
+Explanation:
+
+You should use channels 1, 6 and 11 in the 2.4GHz band within the US. Although there are 14 channels, only three nonoverlapping channels can be used - 1, 6, and 11. Channels 12, 13 and 14 CANNOT be used within the US
+
+<ins>Review Question 2</ins>
+
+Which of the following wireless standards operates in the 2.4GHz range at speeds of up to 54Mbps?
+
+1. 802.11a
+2. 802.11b
+3. 802.11g 
+4. 802.11n
+
+<details><summary>Review Question 2 Answer</summary>
+<p>
+	
+The answer is __c__
+
+Explanation:
+
+The 802.11g standard classifies devices that operate in the 2.4GHz range with a max data throughput rate of 54 Mbps. 802.11a has a max data throughput of 54Mbps but only operates in 5GHz. 802.11b standard operates in 2.4GHz range but has max data throughpu8t rate of 11Mbps. 802.11n standard supports 2.4GHz and 5GHz and has max data throughput of 600Mbps
+
+</p>
+</details>
+
+<ins>Review Question 3</ins>
+
+Which of the following wireless security methods supports AES-GCMP for encryption?
+
+1. WEP
+2. WPA
+3. WPA2
+4. WPA3
+
+<details><summary>Review Question 3 Answer</summary>
+<p>
+	
+The answer is __c__
+
+Explanation:
+
+WPA3 supports AES-GCMP for encryption. WPA3-Personal supports AES-CCMP as a minimum level of encryption
