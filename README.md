@@ -1035,7 +1035,7 @@ IPv6 offers all of the following features:
 * Relies on Transport layer protocols instead of header checksums for data integrity
 * More efficient route aggregration by using multiple prefixes
 
-## Differences Between IPv4 and IPv6 Headers <a name="DIFFHEADERS"></a> ([Back to Index](#INDEX))
+## Differences Between IPv4 and IPv6 Headers <a name="DIFFHEADERS"></a> ([Back to Index](#INDEX2))
 
 An IPv4 header contains the following fields:
 
