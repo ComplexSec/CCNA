@@ -1830,7 +1830,88 @@ WPA3 supports AES-GCMP for encryption. WPA3-Personal supports AES-CCMP as a mini
 3. [Device Virtualization](#DEVVIRT)
 4. [Network Virtualization](#NETVIRT)
 5. [Container-Based Virtualization](#CONBAS)
-5. [Review Questions](#REV4)
+6. [Review Questions](#REV4)
 
 ![](/images/network3.png)
 
+## Summary <a name="SUMVIRT"></a> ([Back to Index](#INDEX4))
+
+Virtualization provides several advantages over traditional network:
+
+* Partitioning
+* Isolation
+* Encapsulation
+* Hardware Independence
+
+Hypervisor responsible for facilitating the interaction between physical and virtualized hardware. There are two main types of hypervisors - Type 1 and Type 2
+
+* Type 1 Hypervisors - implemented directory on the physical hardware without the need for an underlying OS
+* Type 2 Hypervisors - run as privileged applications on the underlying OS
+
+VM is typically stored as a small number of files - VM config, virtual hard drive, possibly VM snapshots
+
+vSwitches are commonly used to connect VMs to each other and to the external network. vSwitches are managed by hypervisors and can interact with physical hardware only through hypervisors
+
+A container bundles binary files and libraries necessary to run its main applications. A container shares operating kernel with the rest of processes on the host - it is more efficient and lightweight than a VM
+
+## Understanding Virtualization <a name="VIRTUALIZE"></a> ([Back to Index](#INDEX4))
+
+In organizations that conform to a traditional network structure, the specific processes or applications required by that organization are allocated dedicated physical resources
+
+An example inlcude your organization requiring a web server, network management system (NMS), centralized network file sharing and a database server.
+
+In a typical networking environment, these apps and services would be implemented on dedicated physical hardware. Four separate physical servers would be required to fill those organizational requirements. If your organization's business model required redundancy, additional physical hardware would likely be implemented
+
+Using dedicated hardware has the advantage of enhancing security by isolating the apps and services from each other. Such a configuration enables the organization to control interactions between and access to the apps/services but it does not scale well
+
+A network configuration that relies exclusively on physical resources is not efficient with regard to:
+
+* Rack space
+* Cooling requirements
+* Energy requirements
+* Resource utilization
+
+If a web server uses 10% of the resources available on its hardware platform, those unused resources cannot be reallocated
+
+Virtualization solves many of the inefficiencies of traditional networking by creating a virtual environment where processes and services can be deployed and resources can be allocated more efficiently
+
+Some of the processes/services in the previous example could be deployed to virtual servers - share physical resources of a single physical server yet remain isolated as though they existed on separate hardware
+
+## Device Virtualization <a name="DEVVIRT"></a> ([Back to Index](#INDEX4))
+
+Device virtualization relies on the deployment of a VM which emulates the physical hardware of a host computer. An OS can be installed on a VM as though it were a physical host. Applications and services can be installed on and configured for that VM
+
+Depending on the device virtualization mechanism, the OS may require minimal modification through installation of specific drivers
+
+The VM itself is typically stored as a small number of files that include:
+
+* VM configuration
+* Virtual hard drive
+* Possible VM snapshots - save the state of a VM
+
+VMs provide several advantages over traditional network environments
+
+Partitioning enables a single host to run multiple different OS simultaneously and allocate resources among them
+
+Isolation contains VMs in their virtual environments thereby preventing those VMs from discovering any others
+
+Encapsulation allows VMs to easily migrate between hosts
+
+Hardware independence ensures that a VM can migrate to any physical host with appropriate resources
+
+<ins>The Hypervisor</ins>
+
+A Hypervisor is software that is capable of virtualizing the physical components of computer hardware. A Hypervisor is responsible for facilitating the interaction between physical hardware and virtualized hardware
+
+Two main types of Hypervisors:
+
+* Type 1
+* Type 2
+
+Type 1 Hypervisors are implemented directly on the physical hardware without the need for an underlying OS whereas Type 2 Hypervisors run as privileged applications running on underlying OS
+
+## Network Virtualization <a name="NETVIRT"></a> ([Back to Index](#INDEX4))
+
+## Container-Based Virtualization <a name="CONBAS"></a> ([Back to Index](#INDEX4))
+
+## Review Questions <a name="REV4"></a> ([Back to Index](#INDEX4))
