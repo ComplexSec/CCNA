@@ -858,10 +858,10 @@ An Ethernet Frame typically consists of seven fields in the following order:
 
 The first 5 fields are known as the __Ethernet Header__
 
-The __Preamble__ field is used to notify receiving hosts that a frame is being sent
-The __SOF__ field is used for synchronization with other hosts on the LAN
-The __Destination Address__ field contains the MAC address of the host which the data is intended for
-The __Source Address__ field contains the MAC address of the host sending the data
+* The __Preamble__ field is used to notify receiving hosts that a frame is being sent
+* The __SOF__ field is used for synchronization with other hosts on the LAN
+* The __Destination Address__ field contains the MAC address of the host which the data is intended for
+* The __Source Address__ field contains the MAC address of the host sending the data
 
 The major difference between an Ethernet header and an 802.3 header is the 2-byte field that ends each header. An Ethernet header contains a 2-byte length field that stores the number of bytes that are contained in the frame's data field. An 802.3 header uses a type field to indicate the protocol that is intended to receive the frame's data after processing
 
@@ -958,17 +958,17 @@ IP addresses consist of two parts:
 * Network portion
 * Host portion
 
-Class A - start with 0
-Class B - start with 10
-Class C - start with 110
-Class D - start with 1110
-Class E - start with 1111
+* Class A - start with 0
+* Class B - start with 10
+* Class C - start with 110
+* Class D - start with 1110
+* Class E - start with 1111
 
-Class A - first octet ranges from 1 through 127
-Class B - first octet ranges from 128 through 191
-Class C - first octet ranges from 192 through 223
-Class D - first octet ranges from 224 through 239
-Class E - first octet ranges from 240 through 255
+* Class A - first octet ranges from 1 through 127
+* Class B - first octet ranges from 128 through 191
+* Class C - first octet ranges from 192 through 223
+* Class D - first octet ranges from 224 through 239
+* Class E - first octet ranges from 240 through 255
 
 The following are valid IP addresses in each of the classes available for commercial use as defined by RFC 1918:
 
