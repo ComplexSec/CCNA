@@ -866,8 +866,121 @@ An interface status of up combined with a line protocol of down most likely indi
 
 ## Review Questions <a name="REV2"></a> ([Back to Index](#INDEX))
 
+<ins>Review Queston 1</ins>
+
+Which of the following is the OUI in the MAC address 22:44:66:88:AA:CC?
+
+1. 22:44:66
+2. 44:66:88
+3. 66:88:AA
+4. 88:AA:CC
+
+<details><summary>Review Question 1 Answer</summary>
+<p>
+	
+The answer is __1__
+
+Explanation:
+
+The OUI in the MAC address 22:44:66:88:AA:CC is 22:44:66. MAC addresses are 48 bit addresses that are written in hexadecimal format. The first three octets represent the OUI
+
 </p>
 </details>
+
+<ins>Review Queston 2</ins>
+
+Which of the following is an IPv4 address that can be routed over the Internet?
+
+1. 10.16.1.1
+2. 10.32.1.1
+3. 172.16.1.1
+4. 172.32.1.1
+5. 192.168.16.1
+6. 192.168.32.1
+
+<details><summary>Review Question 2 Answer</summary>
+<p>
+	
+The answer is __4__
+
+Explanation:
+
+The address 172.32.1.1 is an IPv4 address that can be routed over the Internet. The following ranges are used for private IPv4 addressing:
+
+10.0.0.0 through 10.255.255.255
+172.16.0.0 through 172.31.255.255
+192.168.0.0 through 192.168.255.255
+	
+</p>
+</details>
+
+<ins>Review Queston 3</ins>
+
+Which of the following IPv6 prefixes is used for unique local unicast addresses?
+
+1. 2000::/3
+2. FC00::/7
+3. FE80::/10
+4. FF00::/8
+
+<details><summary>Review Question 3 Answer</summary>
+<p>
+	
+The answer is __2__
+
+Explanation:
+
+The FC00::/7 prefix includes IPv6 addresses that begin with FC or FD. Unique local unicast addresses are similiar to IPv4 private addresses. The IPv6 prefix 2000::/3 is used for global unicast addresses - beginning with 2 or 3. The IPv6 prefix FE80::/10 is used for link local unicast addresses - beginning with FE8, FE9, FEA or FEB. IPv6 prefix FF00::/8 is used for multicast addresses - beginning with FF
+
+</p>
+</details>
+
+<ins>Review Question 4</ins>
+
+
+Which of the following protocols use TCP (select 3 choices)?
+
+1. DHCP
+2. FTP
+3. HTTP
+4. SMTP
+5. SNMP
+6. TFTP
+
+<details><summary>Review Question 4 Answers</summary>
+<p>
+	
+The answer is __2,3 and 4__
+
+Explanation:
+
+FTP, HTTP and SMTP use TCP. TCP is a Transport Layer protocol that is used for reliable, connection-oriented transfer of data
+
+</p>
+</details>
+
+</p>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <details><summary>Module 3 - Wireless Networks</summary>
 <p>
