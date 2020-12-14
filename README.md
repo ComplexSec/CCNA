@@ -2071,6 +2071,6 @@ VMs require a hypervisor. A hypervisor is computer software, firmware or hardwar
 9. [Understanding EtherChannel](#CHUNKYBOI)
 10. [Review Questions](#REV5)
 
-![](/images/network3.png)
+![](/images/network6.jpg)
 
 ## Summary <a name="SUMVIRT"></a> ([Back to Index](#INDEX4))
