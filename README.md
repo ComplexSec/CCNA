@@ -1816,3 +1816,21 @@ WPA3 supports AES-GCMP for encryption. WPA3-Personal supports AES-CCMP as a mini
 
 </p>
 </details>
+
+</p>
+</details>
+
+<details><summary>Module 4 - Virtualization Fundamentals</summary>
+<p>
+
+# Table of Contents <a name="INDEX4"></a>
+
+1. [Summary](#SUMVIRT)
+2. [Understanding Virtualization](#VIRTUALIZE)
+3. [Device Virtualization](#DEVVIRT)
+4. [Network Virtualization](#NETVIRT)
+5. [Container-Based Virtualization](#CONBAS)
+5. [Review Questions](#REV4)
+
+![](/images/network3.png)
+
