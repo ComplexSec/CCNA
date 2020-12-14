@@ -822,8 +822,49 @@ An interface status of up combined with a line protocol of down most likely indi
 
 ![](/images/network2.jpg)
 
+## Summary <a name="SUMMARY"></a> ([Back to Index](#INDEX))
 
 
+## Layer 2 Addressing <a name="L2ADD"></a> ([Back to Index](#INDEX))
+
+
+## Layer 3 Addressing <a name="L3ADD"></a> ([Back to Index](#INDEX))
+
+
+## Differences Between IPv4 and IPv6 <a name="DIFF46"></a> ([Back to Index](#INDEX))
+
+
+## Differences Between IPv4 and IPv6 Headers <a name="DIFFHEADERS"></a> ([Back to Index](#INDEX))
+
+
+## IPv6 Address Composition <a name="IPV6COMP"></a> ([Back to Index](#INDEX))
+
+
+## IPv6 Prefixes <a name="IPV6PREFIX"></a> ([Back to Index](#INDEX))
+
+
+## IPv6 Address Types <a name="IPV6TYPES"></a> ([Back to Index](#INDEX))
+
+
+## Global Unicast Addresses and Route Aggregration <a name="GLOBUNI"></a> ([Back to Index](#INDEX))
+
+
+## EUI-64 Interface IDs <a name="EUI64ID"></a> ([Back to Index](#INDEX))
+
+
+## Stateful and Stateless Address Configuration <a name="STATEADD"></a> ([Back to Index](#INDEX))
+
+
+## Using IPv6 in an IPv4 World <a name="IPV4WORLD"></a> ([Back to Index](#INDEX))
+
+
+## Verifying Layer 3 Addressing <a name="VERL3"></a> ([Back to Index](#INDEX))
+
+
+## Layer 4 Addressing <a name="L4ADDRESSING"></a> ([Back to Index](#INDEX))
+
+
+## Review Questions <a name="REV2"></a> ([Back to Index](#INDEX))
 
 
 
