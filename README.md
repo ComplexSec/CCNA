@@ -802,7 +802,7 @@ An interface status of up combined with a line protocol of down most likely indi
 
 ## NOTE: This module skips over some subnetting information as it is assumed you know it by now. If you need a refresher, please click [here](https://www.google.com)
 
-# Table of Contents <a name="INDEX"></a>
+# Table of Contents <a name="INDEX2"></a>
 
 1. [Summary](#SUMMARY)
 2. [Layer 2 Addressing](#L2ADD)
@@ -822,7 +822,7 @@ An interface status of up combined with a line protocol of down most likely indi
 
 ![](/images/network2.jpg)
 
-## Summary <a name="SUMMARY"></a> ([Back to Index](#INDEX))
+## Summary <a name="SUMMARY"></a> ([Back to Index](#INDEX2))
 
 Addresses are used to send messages between communicating devices at Layer 2, Layer 3 and Layer 4 of the OSI model. Communication on Ethernet networks use 48-bit MAC addresses at Layer 2. MAC addresses are assigned by manufacturer and cannot typically be changed.
 
@@ -830,7 +830,7 @@ IPv4 and IPv6 are predominantly used on Ethernet networks at Layer 3. IPv4 addre
 
 UDP and TCP port numbers are used to determine services at Layer 4. UDP is a connectionless protocol while TCP is a connection-oriented protocol
 
-## Layer 2 Addressing <a name="L2ADD"></a> ([Back to Index](#INDEX))
+## Layer 2 Addressing <a name="L2ADD"></a> ([Back to Index](#INDEX2))
 
 Layer 2 addresses are created and assigned to devices when the device is manufactured. They have a combination of a manufacturing code assigned by the IEEE and a unique code to each unit.
 
@@ -883,7 +883,7 @@ The two least significant bits of the most significant byte of a MAC address are
 
 The second least significant bit is used to designate whether the MAC address is globally administered by IEEE and carries an OUI or is locally administered - O means OUI and 1 means Locally Administered
 
-## Layer 3 Addressing <a name="L3ADD"></a> ([Back to Index](#INDEX))
+## Layer 3 Addressing <a name="L3ADD"></a> ([Back to Index](#INDEX2))
 
 Layer 3 addresses are assigned to devices that use IP to exchange data on a network. IP is a route protocol
 
@@ -1024,7 +1024,7 @@ IPv4 addresses and subnet masks can be:
 
 Very small networks can be easily managed by an administrator who manually allocates IP addresses to devices as needed but DHCP configuration makes more sense for networks in which manual assignment could produce significant admin overhead
 
-## Differences Between IPv4 and IPv6 <a name="DIFF46"></a> ([Back to Index](#INDEX))
+## Differences Between IPv4 and IPv6 <a name="DIFF46"></a> ([Back to Index](#INDEX2))
 
 IPv6 offers several improvements over IPv4:
 
@@ -1075,7 +1075,7 @@ The IPv6 Main Header contains the following fields:
 * Source Address - same as IPv4 header
 * Destination Address - same as IPv4 header
 
-## IPv6 Address Composition <a name="IPV6COMP"></a> ([Back to Index](#INDEX))
+## IPv6 Address Composition <a name="IPV6COMP"></a> ([Back to Index](#INDEX2))
 
 IPv6 address consists of 32 hexadecimal characters representing a 128 bit binary value. IPv6 addresses can be separated into eight 4 character quartets separated by colons
 
@@ -1095,7 +1095,7 @@ You can also abbreviate IPv6 addresses by representing either a single quartet o
 
 You can only use the double colon abbreviation once in an IPv6 address -if multiple sets of zeroes are present the longest set should be replaced
 
-## IPv6 Prefixes <a name="IPV6PREFIX"></a> ([Back to Index](#INDEX))
+## IPv6 Prefixes <a name="IPV6PREFIX"></a> ([Back to Index](#INDEX2))
 
 IPv6 addresses consist of two distinct segments:
 
@@ -1109,7 +1109,7 @@ Because IPv6 is large, some IPv6 prefixes can contain multiple subprefixes which
 
 Route Aggregration is the process of grouping routes with common addresses together under a single prefix to minimize the size of a routing table and increase router efficiency
 
-## IPv6 Address Types <a name="IPV6TYPES"></a> ([Back to Index](#INDEX))
+## IPv6 Address Types <a name="IPV6TYPES"></a> ([Back to Index](#INDEX2))
 
 IPv4 uses three types of address:
 
@@ -1134,25 +1134,25 @@ All OSPF DRs | 224.0.0.6 | FF02:0:0:0:0:0:0:5
 All RIP Routers (except RIPv1) | 224.0.0.9 | FF02:0:0:0:0:0:0:9
 All EIGRP Routers | 224.0.0.10 | FF02:0:0:0:0:0:0:A
 
-## Global Unicast Addresses and Route Aggregration <a name="GLOBUNI"></a> ([Back to Index](#INDEX))
+## Global Unicast Addresses and Route Aggregration <a name="GLOBUNI"></a> ([Back to Index](#INDEX2))
 
 
-## EUI-64 Interface IDs <a name="EUI64ID"></a> ([Back to Index](#INDEX))
+## EUI-64 Interface IDs <a name="EUI64ID"></a> ([Back to Index](#INDEX2))
 
 
-## Stateful and Stateless Address Configuration <a name="STATEADD"></a> ([Back to Index](#INDEX))
+## Stateful and Stateless Address Configuration <a name="STATEADD"></a> ([Back to Index](#INDEX2))
 
 
-## Using IPv6 in an IPv4 World <a name="IPV4WORLD"></a> ([Back to Index](#INDEX))
+## Using IPv6 in an IPv4 World <a name="IPV4WORLD"></a> ([Back to Index](#INDEX2))
 
 
-## Verifying Layer 3 Addressing <a name="VERL3"></a> ([Back to Index](#INDEX))
+## Verifying Layer 3 Addressing <a name="VERL3"></a> ([Back to Index](#INDEX2))
 
 
-## Layer 4 Addressing <a name="L4ADDRESSING"></a> ([Back to Index](#INDEX))
+## Layer 4 Addressing <a name="L4ADDRESSING"></a> ([Back to Index](#INDEX2))
 
 
-## Review Questions <a name="REV2"></a> ([Back to Index](#INDEX))
+## Review Questions <a name="REV2"></a> ([Back to Index](#INDEX2))
 
 <ins>Review Question 1</ins>
 
