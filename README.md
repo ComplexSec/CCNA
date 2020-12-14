@@ -800,7 +800,7 @@ An interface status of up combined with a line protocol of down most likely indi
 <details><summary>Module 2 - Network Addressing and Transport</summary>
 <p>	
 
-NOTE: This module skips over some subnetting information as it is assumed you know it by now. If you need a refresher, please click [here](https://www.google.com)
+## NOTE: This module skips over some subnetting information as it is assumed you know it by now. If you need a refresher, please click [here](https://www.google.com)
 
 ![](/images/network2.jpg)
 
