@@ -1506,7 +1506,7 @@ FTP, HTTP and SMTP use TCP. TCP is a Transport Layer protocol that is used for r
 <details><summary>Module 3 - Wireless Networks</summary>
 <p>
 
-# Table of Contents <a name="INDEX"></a>
+# Table of Contents <a name="INDEX3"></a>
 
 1. [Summary](#SUMWIFI)
 2. [Radio Frequency](#RADIOF)
@@ -1518,3 +1518,112 @@ FTP, HTTP and SMTP use TCP. TCP is a Transport Layer protocol that is used for r
 8. [Review Questions](#REV3)
 
 ![](/images/network4.jpg)
+
+## Summary <a name="SUMWIFI"></a> ([Back to Index](#INDEX3))
+
+Wireless communications occur over RF signals. Wireless devices communicate using an IBSS, BSS or ESS wireless topology
+
+WLAN communication occurs over two wireless bands - 2.4GHz and 5GHz. The 2.4GHz band has overlapping channels whereas the 5GHz band has non-overlapping channels
+
+IEEE introduced several wireless standards
+
+* 802.11-1997
+* 802.11b
+* 802.11a
+* 802.11g
+* 802.11n
+* 802.11ac
+* 802.11ax
+
+Each successive standard introduced efficiency and data-rate improvements over previous standards
+
+Wireless clients must associated with an AP in order to communicate on a WLAN. To associate with an AP, the client must be configured with the SSID, appropriate security method and correct authentication key
+
+## Radio Frequency <a name="RADIOF"></a> ([Back to Index](#INDEX3))
+
+WLANs differen from LANs in several ways. Commmunication between devices on a wireless network occurs through the use of radio frequency (RF) signals which are electrical signals sent over the air
+
+RF signals are typically received by radio antennas and can be used to transmit video, audo and data
+
+In WLANs, hosts connect to APs which provide hosts with access to the rest of the network. In medium-to-large Cisco networks, a wireless LAN controller (WLC) can be used along with Lightweight Access Point Protocol (LWAPP) to manage APs
+
+WLCs allow an administrator to centralize security configurations among APs and provide mobility services at Layer 2/3 of the OSI model
+
+RF networks are susceptible to electrical interference. Electrical devices in your office building could cause interference to occur. Wireless devices that are close to the source of the interference could experience a disruption in wireless connectivity - sources can include microwaves, cordless phones, high-power electric lines. Metal shelves, cabinet and machinery can also block a wireless signal
+
+Ensure devices do not lose connectivity by installing multiple APs on the networ. RF networks are also susceptible to noise from other devices operating on the same radio frequency or channel. More devices on the same channel, more likely interference occurs
+
+## WLAN Topologies <a name="WLAN"></a> ([Back to Index](#INDEX3))
+
+<ins>IBSS</ins>
+
+Independent Basic Service Set (IBSS) is an IEEE 802.11 standard WLAN topology consisting of individual peers sometimes referred to as ad-hoc mode
+
+Nodes in ad-hoc mode communicate directly without the use of an AP
+
+Because IBSS networks lack an authentication server, clients are limited in the authentication methods that are available. Lack of available methods makes communications between IBSS devices difficult to secure
+
+<ins>BSS</ins>
+
+Basic Service Set (BSS) is an IEEE 802.11 standard WLAN topology consisting of wireless clients that connect to a single AP. In a BSS, the AP connects to a wired network and provides clients with access to the wired network
+
+Wireless networks that use one or more APs to communicate run in infrastructure mode. Most WLANs operate in infrastructure mode
+
+<ins>ESS</ins>
+
+Extended Service Set (ESS)  is an IEEE 802.11 standard WLAn toplogy consisting of multiple APs on the same subnet. ESS consists of two or more BSSs that are linked by a wired/wireless backbone
+
+Overlapping area between APs ensures that devices can roam from one AP to another without losing connection - coverage overlap of 10-15% is considered optimal
+
+Coverage areas between neighbouring APs should overlap. Neighbouring APs should use wireless channels that do not overlap - ensure APs do not intefere with one another
+
+## Wireless Bands and Channels <a name="BANCHAN"></a> ([Back to Index](#INDEX3))
+
+WLAN communication typically occurs over two wireless bands:
+
+* 2.4GHz
+* 5GHz
+
+The 2.4GHz band is divided into 14 channels which are each 24MHz wide
+
+Channel | Range (GHz)
+------------ | -------------
+1 | 2.401 - 2.423
+2 | 2.406 - 2.428
+3 | 2.411 - 2.433
+4 | 2.416 - 2.438
+5 | 2.421 - 2.443
+6 | 2.426 - 2.448
+7 | 2.431 - 2.453 
+8 | 2.436 - 2.458
+9 | 2.441 - 2.463
+10 | 2.446 - 2.468
+11 | 2.451 - 2.473
+12 | 2.456 - 2.478
+13 | 2.461 - 2.483
+14 | 2.473 - 2.495
+
+The channels available for wireless transmission can be limited by local regulatory agencies. Only channels 1-11 are allowed in the US
+
+The channels in the 2.4GHz band have overlapping ranges. Channels that overlap can intefere with one another
+
+A device communication on channel 2 can intefere with a device communicating on channel 5. It is recommended to use nonoverlapping channels. There are three non overlapping channels in the US - 1, 6 and 11. Channels 12 and 13 can be used in most of the world and Channel 14 can only be used in Japan
+
+The 5GHz spectrum is divided into four bands. Each band contains several nonoverlapping channels and each channel is 20MHz wide
+
+Band | Range (GHz) | Channel List
+------------ | ------------- | -------------
+U-NII-1 | 5.150 - 5.250 | 36 40 44 48
+U-NII-2 | 5.250 - 5.350 | 52 56 60 64
+U-NII-2 Extended | 5.470 - 5.725 | 100 104 108 112 116 120 124 128 132 136 140
+U-NII-3 | 5.725 0 5.825 | 149 153 157 161
+
+Gaps between these ranges are allocated for other purposes. Works is underway to repurpose some frequency ranges and add them to the usable wireless spectrum
+
+Unlike chanels in the 2.4GHz band, channels in the 5GHz band do not intefere with each other. More devices use the 2.4GHz band than a 5GHz band. A device that uses 5GHz band is less likely to encounter interference than a device using 2.4GHz band
+
+## Associating with an AP <a name="ASSAP"></a> ([Back to Index](#INDEX3))
+
+## 802.11 MAC Frames <a name="MACFRA"></a> ([Back to Index](#INDEX3))
+
+## Review Questions <a name="REV3"></a> ([Back to Index](#INDEX3))
