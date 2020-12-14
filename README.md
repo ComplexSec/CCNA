@@ -735,15 +735,15 @@ Network Layer troubleshooting might involve the examination of routing tables an
 
 How do spines and leafs connect in a spine-leaf topology?
 
-A) Each leaf must connect to every spine
-B) Each leaf must connect to at least two spines
-C) Each spine must connect to every other spine
-D) Each leaf must connect to every other leaf
+1. Each leaf must connect to every spine
+2. Each leaf must connect to at least two spines
+3. Each spine must connect to every other spine
+4. Each leaf must connect to every other leaf
 
 <details><summary>Review Question 1 Answer</summary>
 <p>
 	
-The answer is __A__
+The answer is __1__
 
 Explanation:
 
@@ -756,14 +756,14 @@ In a spine-leaf topology, each leaf must connect to every spine. In addition, ea
 
 Which of the following cloud computing service models provides the least management control to the consumer?
 
-A) IaaS
-B) PaaS
-C) SaaS
+1. IaaS
+2. PaaS
+3. SaaS
 
 <details><summary>Review Question 2 Answer</summary>
 <p>
 	
-The answer is __C__
+The answer is __3__
 
 Explanation:
 
@@ -776,16 +776,16 @@ SaaS is the cloud computing service model that provides the least management con
 
 An interface has a status of up combined with a line protocol status of down. At which of the following layers does the problem most likely exist?
 
-A) at the Physical Layer
-B) at the Data Link Layer
-C) at the Network Layer
-D) at the Transport Layer
+1. at the Physical Layer
+2. at the Data Link Layer
+3. at the Network Layer
+4. at the Transport Layer
 
 
 <details><summary>Review Question 1 Answer</summary>
 <p>
 	
-The answer is __B__
+The answer is __2__
 
 Explanation:
 
