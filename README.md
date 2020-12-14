@@ -1210,19 +1210,201 @@ Aggregrate routes get larger as you move up the global unicast address hierarchy
 
 ## EUI-64 Interface IDs <a name="EUI64ID"></a> ([Back to Index](#INDEX2))
 
+Each IPv6 host on a network must have a unique address to it. Hosts can use the MAC address assigned to them during manufacturing as part of the Interface ID portion of the address - known as the EUI-64 Interface ID
+
+The EUI-64 Interface ID is added to the IPv6 prefix to create a full IPv6 address. An interface ID in EUI-64 format is created by taking the OUI of the MAC address, appending the hex bynber FFFE and then appending the serial identifier
+
+The seventh binary bit is then set to 0 if the IPv6 address is locally unique or set to 1 if the IPv6 is globally unique - this might change the value of the second hex character which consists of the 4,5,6,7 bits
+
+The MAC address 00:13:03:28:C7:A4 can be separated into:
+
+* OUI of 00:13:02
+* Serial ID of 38:C7:A4
+
+To create an EUI-64 Interface ID, insert FFFE between the OUI and serial ID. Segregrating the 16 characters into four IPv6 quartets results in the ID 0013:02FF:FE38:C7A4
+
+The second hex character is 0 - written as 0000 in binary
+
+The seventh bit is set to 0, so the address would be a locally unique EUI-64 Interface ID
+
+To make the EUI-64 Interface ID globally unique, you must convert the seventh bit to a 1, thereby changing the binary value to 0010 which equals 2 in hexadecimal - the globally unique EUI-64 Interface ID would be 0213:02FF:FE38:C7A4
 
 ## Stateful and Stateless Address Configuration <a name="STATEADD"></a> ([Back to Index](#INDEX2))
 
+Dynamic address configuration of IPv6 devices can be performed by using one of two methods:
+
+* Stateful
+* Stateless
+
+Stateful configuration requires a DHCPv6 server. Stateless configuration allows the client to generate its own address by using IPv6 network prefix and EUI-64 interface ID
+
+<ins>Stateful Configuration</ins>
+
+Using DHCPv6 works similiary to DHCPv4. DHCPv6 uses multicast messages instead of broadcast messages.
+
+An interface that requires an IPv6 address will start out with the unspecified address (__::__). The client will send router solicitation messages by using Neighbour Discovery Protocol (NDP) to discover neighbour routers. Routers will reply with a router advertisement that lets the client known whether DHCPv6 servers are available.
+
+If DHCPv6 servers are available or if the client does not receive any router advertisements, the client will send multicast packets to FF02::1:2 (all DHCP agents address). The DHCPv6 server will configure the client with IPv6 address information such as the client's leased IPv6 address, the IPv6 network prefix, the IPv6 address of the default router, the domain name, and IPv6 address of one or more DNS servers
+
+<ins>Stateless Configuration</ins>
+
+Assigns an IPv6 address to an interface without the need for a DHCPv6 server. A client will send router solicitation messages to discover a router and routers will reply with router advertisements. If router advertisements state that no DHCPv6 server is available, the router advertisements will include thhe IPv6 prefix used on the network as well as the IPv6 address of the default router
+
+The client will combine the IPv6 prefix with the EUI-64 interface ID to create a unique IPv6 adress
+
+Although a DHCP server is not required for stateless configuration, a DHCPv6 server is required in order to configure a client with the domain name and IPv6 addresses of DNS servers - this info is not provided with router advertisements
 
 ## Using IPv6 in an IPv4 World <a name="IPV4WORLD"></a> ([Back to Index](#INDEX2))
 
+It is important to be able to migrate to IPv6 while maintaining the ability to send data over the existing IPv4 infrastructure
+
+Several mechanisms exist that provide interoperability between IPv4 and IPv6:
+
+* Dual Stack
+* Network Address Translation-Protocol Translation (NAT-PT)
+* Tunneling
+
+<ins>Dual Stack</ins>
+
+Dual Stack enables a host or router to communicate over both IPv4 and IPv6. Dual Stack devices are configured with an IPv4 and IPv6 address. The version of IP that is used is determined by the destination address of that packet
+
+<ins>Network Address Translation-Protocol Translation</ins>
+
+NAT-PT is used to enable communication between IPv6-only hosts and IPv4-only hosts. It translates IPv6 packets to IPv4 packets and vice versa
+
+Because NAT-PT relies on address translation, a NAT-PT router must manage address mappings so that the router can correctly translate IPv4 and IPv6 addresses - address mappings can be created statically or dynamically
+
+<ins>Tunneling</ins>
+
+Tunneling is used to pass IPv6 traffic over an IPv4-only network. There are several methods for tunneling IPv6 traffic over IPv4 or vice versa:
+
+* 6to4
+* 4to6
+* Intra-Site Automatic Tunneling Addressing Protocol (ISATAP)
+* Teredo
+
+To pass IPv6 traffic over a network that supports only IPv4, 6to4 tunneling is often used. 6to4 tunneling __encapsulates__ an IPv6 packet inside an IPv4 header. Each IPv6 network border router that acts as a tunnel endpoint must be configured with both IPv4 and IPv6 stack
+
+Routers on the IPv4 only network recognize only the IPv4 header information - IPv6 packet is simply carried as the data payload of the IPv4 packet. Automatic 6to4 tunneling establishes point-to-multipoint links to remote IPv6 networks over a shared IPv4 network. Manually configured tunnels are typically point-to-point
+
+4to6 tunneling method is the reverse of the 6to4 tunneling method. Routers on the IPv6 only network recognize only the IPv6 header information. IPv4 packets must be encapsulated inside an IPv6 header so they can pass over the IPv6-only network
+
+ISATAP tunneling works similiarly to 6to4 tunneling but does not support IPv4 NAT on the tunnel endpoints
+
+Teredo tunneling creates the tunneling endpoints on dual-stack hosts instead of on the routers. The host itself will create the IPv6 packet and encapsulate it inside an IPv4 packet
 
 ## Verifying Layer 3 Addressing <a name="VERL3"></a> ([Back to Index](#INDEX2))
 
+<ins>Windows 10 Verification</ins>
+
+To determine IP addressing information on a computer running Windows 10 by using the GUI, use the following steps:
+
+1. Go to Settings
+2. Select Network & Internet
+3. On the left-hand pane, select Wi-Fi or Ethernet
+4. Scroll down to Properties
+
+To achieve the same using the CLI, simply type __ipconfig__ into the Command Prompt
+
+<ins>Linux Verification</ins>
+
+The GUI for each Linux disto can differ. You can usually find IP addressing information on the Network tab in the Settings menu
+
+You can determine IP addressing information on a computer running Linux by issuing any of the following commands:
+
+* hostname -I
+* ip addr
+* ifconfig
+
+<ins>MacOS Verification</ins>
+
+To determine IP addressing information on a computer running MacOS by using GUI, use the following steps:
+
+1. From the Apple menu, pull down System Preferences
+2. Click on the Network preference pane
+3. Select the interface on the left
+
+To achieve the same using the CLI, enter any of the following commands in the CLI:
+
+* ifconfig | grep inet
+* ipconfig getifaddr en0 (usually for Ethernet)
+* ipconfig getifaddr en1 (usually for Wi-Fi)
 
 ## Layer 4 Addressing <a name="L4ADDRESSING"></a> ([Back to Index](#INDEX2))
 
+Packet addressing at Layer 4 focuses on port numbers - they are assigned by IANA
 
+A port is the communication channel used by computers on networks to move data from one computer to another. Well-known port numbers are assigned to enable unknown clients to communicate with one another
+
+The IANA has designated three ranges of port numbers:
+
+* Well known port numbers from 0 to 1023
+* Registered port numbers from 1024 to 49151
+* Dynamic and/or private ports from 49152 to 65535
+
+A packet's IP address may be appended with a port number and the combined address creates what is called the __socket address__
+
+On the Transport Layer, data is directed to its corresponding application process on a computer as indicated by the port number. The socket address is extracted by the OS, and the headers are removed before the data packets are delivered to the appropriate application
+
+<ins>UDP</ins>
+
+The User Datagram Protocol (UDP) is a Transport layer protocol that is used for unreliable, connectionless datagram transfer. UDP does not establish a communication session before sending data
+
+UDP is considered unreliable because it does not provide error correction or flow control and because a computer does not send an ACK that the data was received
+
+Because there is no sequencing information contained in the UDP ehader, datagrams can arrive out of sequence. It is the responsibility of the application receiving the datagrams to either rearrange them or discard them without notice
+
+The following fields are contained in a UDP header:
+
+* Source Port - 16 bit field that indicates the upper-layer service used on the source device
+* Destination Port - 16 bit field that indicates the upper-layer service that will use the data on the destination device
+* Length - 16 bit field that specifies the length of the UDP segment
+* Checksum - 16 bit field that is used to verify the integrity of the UDP segment to ensure that it was not modified or corrupted in transit
+
+Examples of Application Layer Protocols that rely on UDP for transport include the following:
+
+* DHCP - used to assign IP addressing information to clients and uses UDP ports 67/68
+* SNMP - used to monitor and manage network devices and uses UDP ports 161/162
+* TFTP - used to transfer files over a network and uses UDP port 69
+* NTP - used to synchronize system clock settings and uses UDP port 123
+* RADIUS - used in Authentication, Authorization and Accounting and uses UDP ports 1812/1813
+
+<ins>TCP</ins>
+
+The Transmission Control Protocol (TCP) is used for reliable, connection-oriented transfer of data between networked computers. When a computer wants to communicate over TCP, a three-way handshake is performed between source and destination computers
+
+TCP is considered reliable because it offers features such as:
+
+* Error Detection and Correction
+* Flow Control
+* Sequencing
+* Acknowledgements
+
+Data sent by TCP is ordered and checked for errors and any lost packets are retransmitted
+
+The fields that provide the reliability feature can be seen in the TCP header. A TCP header is much longer than a UDP header
+
+The following fields are contained in a TCP header:
+
+* Source Port - 16 bit field that indicates the upper-layer service used on the source device
+* Destination Port - 16 bit field that indicates the upper-layer service that will use the data on the destination device
+* Sequence Number - 32 bit field that specifies the number given to the first byte of data in the segment and used to reassemble segments
+* Acknowledgement Number - 32 bit field that specifies the sequence number of the next byte of data that the sender expects to receive
+* Data Offset - 4 bit field that indicates the number of 32 bit sections (words) in the TCP header
+* Reserved - 6 bit field that is reserved for future use and should currently be set to zero
+* Flags - 6 bit field that is used to activate control flags such as SYN and ACK for establishing connections and FIN for terminating
+* Window - 16 bit field that specifies the size of the sender's receive window, which is used to buffer incoming data
+* Checksum - 16 bit field that is used to verify the integrity of the TCP segment to ensure that it was NOT modified/corrupted
+* Urgent Pointer - 16 bit field indicates the first urgent data byte in the segment
+* Options - variable-length field that specifies other assorted TCP options; zeroes are appended to pad the end of the options field so the header ends and data begins on a 32 bit boundary
+
+Examples of Application Layer Protocols that rely on TCP for transport include the following:
+
+* FTP - used to transfer files over a network and use TCP ports 20/21
+* HTTP - used to transfer web pages over the internet and uses TCP port 80
+* SMTP - used to send email messages and uses TCP port 25
+* POP3 - used to receive email messages and uses TCP port 110
+* Telnet - used for device management and uses TCP port 23
 ## Review Questions <a name="REV2"></a> ([Back to Index](#INDEX2))
 
 <ins>Review Question 1</ins>
@@ -1320,26 +1502,6 @@ FTP, HTTP and SMTP use TCP. TCP is a Transport Layer protocol that is used for r
 
 </p>
 </details>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <details><summary>Module 3 - Wireless Networks</summary>
 <p>
