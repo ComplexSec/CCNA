@@ -606,3 +606,190 @@ NOTE: INSERT IMAGES
 
 ### Duplex Mismatch
 
+Duplex mismatch errors can cause a number of problems:
+
+* Intermittent connectivity
+* Performance problems
+* High number of collisions
+* Late collisions
+
+Duplex mismatch occurs when the ends of a network link are configured with different duplex settings - both ends need to be configured with the same duplex setting
+
+One symptom of mismatch is the half-duplex side will report late collisions. The full duplex side will report runts, frame check sequences (FCS) and alignment errors
+
+Duplex mismatches can sometimes be difficult to diagnose. If you suspect that a duplex mismatch error is causing network problems, use the __status__ parameter of the __show interfaces__ command - this verifies the duplex settings for all interfaces on a device
+
+NOTE: INSERT IMAGES
+
+The __a-__ indicates autonegotiation. Autonegotiation is a method of electrical signaling between interfaces to enable the automatic configuration of speed and duplex settings on an interface
+
+If one side of the link is statically configured, the autonegotiation-enabled side will attempt to operate at the fastest speed supported - the speed field for autonegotiated port will display auto
+
+Setting autonegotiation on only one side of a link can cause configuration problems on the link - it is not possible to statically configured the duplex settings of a port unless the port speed is statically configured first
+
+### Speed Mismatch
+
+Speed mismatch errors can prevent an interface from sending and receiving traffic. A speed mismatch occurs when one end of a network link is configured to use a different speed than the other end - the link between the two would not be able to be established and remain in a down state
+
+You can explicitly configure the speed setting on an interface or autonegotiate it - you are allowed to have one end autonegotiate and one statically configured
+
+In the case where one is static and one is autonegotiated, the autonegotiating port can identify the other port link's speed by the eletrical signal sent by the port
+
+Prevent a speed mismatch from occuring by ensuring that at least one end of a link is configured to autonegotiate the speed settings
+
+NOTE: INSERT IMAGES
+
+### Understanding the OSI Model to Troubleshoot Networks
+
+There are 3 main techniques for troubleshooting using the OSI Model:
+
+1. Bottom Up 
+2. Top Down
+3. Divide and Conquer
+
+### Bottom Up Troubleshooting Technique
+
+The Bottom Up Technique starts at the Physical layer of the OSI model and works through each layer upward. Typically start troubleshooting by checking the cable is plugged in correctly then check and verify the network card, then IP address, etc...
+
+### Top Dowm Troubleshooting Technique
+
+The Top Down Technique starts at the Application layer of the OSI model and works through each layer downward. Typically start troubleshooting by examining or restarting the network apps
+
+### Divide and Conquer Technique
+
+The Divide and Conquer Technique starts at the Network layer and works either up or down the model depending on the outcome of different tests
+
+NOTE: INSERT IMAGES
+
+### Troubleshooting Physical Layer Connectivity
+
+To troubleshoot the Physical layer, begin by verifying that physical connectivity exists between the router and ISP. There are several ways to verify physical connectivity:
+
+* First, simply examine the cable
+* Second, connect to the router and issue the __show interfaces__ command
+
+When issued without parameters, the __show interfaces__ command displays information about each of the interfaces. An interface status of up indicates that the physical interface is working properly. An interface status of down indicates the presence of a Layer 1 issue
+
+Examples of Layer 1 issues include:
+
+* A faulty interface
+* A broken cable
+* An incorrect cable
+
+You should use a crossover cable to connect the Ethernet interfaces of two similiar devices
+You should use a straight through cable to connect two dissimiliar devices
+
+If the interface is in the administrative down state, issue the __no shut__ command
+
+The __show interfaces__ command provides stats that can help diagnose other Layer 1 problems. Many CRC errors on an interface could be indicative of a bad cable. A high number of input/output queue drops could indicate that the router hardware is unable to efficiently process the volume of traffic being sent to the router
+
+Some Cisco configuration mistakes can create Physical layer problems. The DCE end of a serial connection provides clocking information to the DTE end. If the correct clock rate is not set on the DTE interface, physical connectivity cannot be established. You can use the __show controllers serial__ command to determine which end
+
+Ethernet interfaces require that the duplex configuration matches on each end of the link - either full-duplex or half-duplex. Full Duplex means data is being sent from one pair of wires and received by using a different pair of wires which prevents collisions from occuring and enables both ends of a link to transmit and receive information simultaneously
+
+Most modern devices automatically negotiate the duplex settings for Ethernet, FastEthernet and GigabitEthernet interfaces. Duplex mismatches can still occur if the duplex command is manually configured with different nodes on each end. If a high number of collisions are displayed in the output of the __show interfaces__ command, a duplex mismatch could be it
+
+The speed of an interface is also automatically negotiated on modern devices - a Full Duplex Gig interface that is connected to a Full Duplex Fast interface will negotiate a speed of 100Mbps. If the speed command is issued on each side of the link and the speeds do not match, no link is established
+
+A Fast interface that is manually configured to a speed of 100Mbps will not link with a Gig interface that is manually configured to a speed of 1000Mbps
+
+Cisco recommends manually configuring speed and duplex settings on links to devices that are not likely to change or be moved. For most devices automatic negotiation of speed and duplex should be allowed to occur
+
+### Troubleshooting Data Link Layer Connectivity
+
+The __show interfaces__ command is also good for verifying the Data Link Layer components. A Layer 2 protocol is required to transmit information from one interface to another. Protocols that operate at the Data Link layer include:
+
+* Ethernet
+* PPP
+* High-Level Data Link Control
+* Frame Relay
+
+
+The Line Protocol which is the Data Link layer protocol is in the up state. The Layer 2 protocol must match on each end of a link for connectivity to be established
+
+An interface status of up combined with a line protocol status of down indicates the presence of a Layer 2 problem
+
+Some examples of Data Link layer problems include:
+
+* Mismatched encapsulation between linked serial interfaces
+* Clocking errors
+* Lack of keepalive messages
+
+Verify the Layer 2 encapsulation method by examining the __show interfaces__ command. By default, a Cisco serial interface is configured to use HDLC encapsulation
+
+The __show interfaces__ command is useful for verifying maximum transmission unit (MTU) configured on an interface. The MTU is the largest frame a device can transmit - sometimes also used to describe the largest packet that a router can forward
+
+The default MTU for an Ethernet frame is 1500 bytes. Because an IP packet has a 20 byte header, the largest IP payload that can be carried in an Ethernet frame is 1480 bytes
+
+If a frame exceeds the MTU of a link, the frame will be fragmented if possible or discarded if the DO-NOT-FRAGMENT bit is set
+
+### Troubleshooting Network Layer Connectivity
+
+Troubleshooting Layer 3 is the most involved task in troubleshooting router connectivity. Network Layer troubleshooting requires the verification of correct IPv4 and IPv6 network addressing - must understand IPv4 and VLSM and IPv6 addressing
+
+Network Layer troubleshooting might involve the examination of routing tables and routing protocol configurations or default gateway configurations
+
+## Review Questions <a name="REV1"></a> ([Back to Index](#INDEX))
+
+<ins>Review Queston 1</ins>
+
+How do spines and leafs connect in a spine-leaf topology?
+
+A) Each leaf must connect to every spine
+B) Each leaf must connect to at least two spines
+C) Each spine must connect to every other spine
+D) Each leaf must connect to every other leaf
+
+<details><summary>Review Question 1 Answer</summary>
+<p>
+	
+The answer is __A__
+
+Explanation:
+
+In a spine-leaf topology, each leaf must connect to every spine. In addition, each spine must connect toe very leaf. A spine-leaf topology is a two-tier network architecture in which every lower-tier leaf switch connects to every top-tier spine switch. However, leafs and spines are not connected to each other
+
+</p>
+</details>
+
+<ins>Review Queston 2</ins>
+
+Which of the following cloud computing service models provides the least management control to the consumer?
+
+A) IaaS
+B) PaaS
+C) SaaS
+
+<details><summary>Review Question 2 Answer</summary>
+<p>
+	
+The answer is __C__
+
+Explanation:
+
+SaaS is the cloud computing service model that provides the least management control to the consumer. It enables a consumer to access applications that are running in the cloud infrastructure but does not enable the consumer to manage the cloud infrastructure or configure the provided applications
+	
+</p>
+</details>
+
+<ins>Review Queston 3</ins>
+
+An interface has a status of up combined with a line protocol status of down. At which of the following layers does the problem most likely exist?
+
+A) at the Physical Layer
+B) at the Data Link Layer
+C) at the Network Layer
+D) at the Transport Layer
+
+
+<details><summary>Review Question 1 Answer</summary>
+<p>
+	
+The answer is __B__
+
+Explanation:
+
+An interface status of up combined with a line protocol of down most likely indicates the presence of a L2 problem. Examples of L2 problems include mismatched, encapsulation between serial links, clocking errors, lack of keepalive messages. 
+	
+</p>
+</details>
