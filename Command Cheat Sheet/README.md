@@ -21,7 +21,7 @@ enable | Logs into enable/user exec/privileged mode
 configure terminal | logs you into configuration mode
 interface fastethernet/number | enters interface configuration mode for specified interface
 reload | exec mode command that reboots
-hostname <name> | sets hostname for device
+hostname `<name>` | sets hostname for device
 copy <from> <to> | enable mode command that copies files from one location to another
 copy running-config startup-config | enable mode command that saves active config to startup
 copy startup-config running-config | enable mode command that merges startup config with current active config in RAM
