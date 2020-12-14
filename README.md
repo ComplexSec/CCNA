@@ -1787,7 +1787,7 @@ Which of the following wireless standards operates in the 2.4GHz range at speeds
 <details><summary>Review Question 2 Answer</summary>
 <p>
 	
-The answer is __c__
+The answer is __3__
 
 Explanation:
 
@@ -1808,7 +1808,7 @@ Which of the following wireless security methods supports AES-GCMP for encryptio
 <details><summary>Review Question 3 Answer</summary>
 <p>
 	
-The answer is __c__
+The answer is __4__
 
 Explanation:
 
