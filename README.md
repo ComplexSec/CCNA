@@ -866,15 +866,21 @@ An interface status of up combined with a line protocol of down most likely indi
 
 ## Review Questions <a name="REV2"></a> ([Back to Index](#INDEX))
 
-
-
-
-
-
-
-
-
-
-
 </p>
 </details>
+
+<details><summary>Module 3 - Wireless Networks</summary>
+<p>
+
+# Table of Contents <a name="INDEX"></a>
+
+1. [Summary](#SUMWIFI)
+2. [Radio Frequency](#RADIOF)
+3. [WLAN Topologies](#WLAN)
+4. [Wireless Bands and Channels](#BANCHAN)
+5. [Wireless Standards](#WSTANS)
+6. [Associating with an AP](#ASSAP)
+7. [802.11 MAC Frames](#MACFRA)
+8. [Review Questions](#REV3)
+
+![](/images/network4.jpg)
