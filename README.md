@@ -1187,6 +1187,27 @@ The Loopback Address is 0:0:0:0:0:0:0:1 and is typically written as __::1__. Thi
 
 Global unicast addresses are used to send packets to and from a single interface across globally routable networks. There are five components of a global unicast address and each component represents a separate tier of ownership of the IPv6 address space
 
+The five components are:
+
+* The Registry Prefix - 32 bit prefix assigned to a specific RIR by the ICANN. RIRs manage the allocation of blocks of IPv6 addresses to ISPs in specific geographical regions. This prefix is located at the top of the hierarchy
+
+* The ISP Prefix - 9 bit prefix that is assigned to an ISP by an RIR. ISPs manage the allocation of blocks of IPv6 addresses from their ISP prefix range to their customers. This prefix is second in the hierarchy
+
+* The Site Prefix - 16 bit prefix assigned to an organization by an ISP. A site admin can subnet it. This prefix is third in the hierarchy
+
+* The Subnet Prefix - 16 bit prefix that represents a specific subnet of IPv6 addresses within the organization address range. This prefix is fourth in the hierarchy
+
+* The Interface ID - represents the destination host that uses the remaining 64 bits. This prefix is the final tier of the hierarchy
+
+Route Aggregration reduces the number of routes that must be advertised to a network - combines smaller networks into a large subnet
+
+Aggregrate routes get larger as you move up the global unicast address hierarchy. The hierarchy enables routers to maintain smaller routing tables - they only need to know the range allocated to the RIR, ISP or organization
+
+* The __subnet prefix__ is an aggregrate route to the interface IDs within the subnet
+* The __site prefix__ is an aggregrate route to the subnets that are within the site
+* The __ISP prefix__ is an aggregrate route to the blocks of addresses that an ISP has distributed to orgs
+* The __registry prefix__ is an aggregrate route to the networks that an RIR has distributed to ISPs
+
 ## EUI-64 Interface IDs <a name="EUI64ID"></a> ([Back to Index](#INDEX2))
 
 
