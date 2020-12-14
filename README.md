@@ -1772,6 +1772,9 @@ Explanation:
 
 You should use channels 1, 6 and 11 in the 2.4GHz band within the US. Although there are 14 channels, only three nonoverlapping channels can be used - 1, 6, and 11. Channels 12, 13 and 14 CANNOT be used within the US
 
+</p>
+</details>
+
 <ins>Review Question 2</ins>
 
 Which of the following wireless standards operates in the 2.4GHz range at speeds of up to 54Mbps?
@@ -1810,3 +1813,6 @@ The answer is __c__
 Explanation:
 
 WPA3 supports AES-GCMP for encryption. WPA3-Personal supports AES-CCMP as a minimum level of encryption
+
+</p>
+</details>
