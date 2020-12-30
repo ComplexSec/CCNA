@@ -2073,4 +2073,42 @@ VMs require a hypervisor. A hypervisor is computer software, firmware or hardwar
 
 ![](/images/network6.jpg)
 
-## Summary <a name="SUMVIRT"></a> ([Back to Index](#INDEX4))
+## Summary <a name="SUMSWITCH"></a> ([Back to Index](#INDEX5))
+
+Switches are responsible for switching frames by using a MAC address. When a switch receives a frame, the switch adds the source MAC to the CAM table if the address does not already exist so the switch knows to the port which frames are destined for that address should be sent. Then, the switch will check the CAM table to determine whether the destination MAC address is listed. If yes, the switch directs the frame to the appropriate port. If not, the switch broadcasts the frame out all ports except the ingress port
+
+When a switch is used to connected endpoint devices to a network, all devices connected to the switch are members of the same broadcast domain, but each port represents a different collision domain
+
+VLANs can be configured to segment a network into multiple broadcast domains. VLANs can be local to a switch or they can extend throughout the topology by using features such as VTP and 802.1Q trunking
+
+CDP and LLDP are supported on most Cisco devices and can be used to gather information about neighbouring devices. Some devices such as IP Phones can use CDP and LLDP to negotiate power delivery through mechanisms such as PoE
+
+Switches also provide the ability to prevent loops by using a protocol such as STP and RSTP. Cisco's implementations of STP and RSTP offer performance optimization and reduced convergence times
+
+In addition, Cisco enhancements to STP such as PortFast and BPDUGuard offer additional capabilities that can further reduce convergence times
+
+EtherChannel can be used to bundle multiple physical interfaces into a single logical link. EtherChannel is typically used to increase the usable bandwidth between two devices, such as an access switch and a distribution switch and to provide redundancy
+
+## Understanding Switching Fundamentals <a name="SWITCHFUN"></a> ([Back to Index](#INDEX5)) 
+
+Both hubs and switches can be used to connect endpoint devices to a network. However, there are some major differences between how hubs and switches function
+
+When a hub is used to connect endpoint devices to a network, all devices connected to the hub are members of the same broadcast domain, same collision domain and share the same bandwidth. When one device sends a packet, it affects the bandwidth that is available to all other devices. If more than one device sends a packet, collisions can occur and the packets will need to be re-sent
+
+Hubs do NOT use processor logic to perform path determination or packet switching. When a hub receives data, it transmits it out all ports except the received port
+
+When a switch is used to connect endpoint devices, all devices connected to the switch are members of the same broadcast domain but each port represents a different collision domain and receives a dedicated amount of bandwidth
+
+Because each port represents a separate collision domain, multiple devices can send traffic at the same time without causing collisions. Switches also support full-duplex operation - data can be sent and received at the same time
+
+When full-duplex mode is configured, data is sent from one pair of wires and received by a different pair of wires - this prevents collisions from occurring. By contrast, hubs support ONLY half-duplex operation meaning they cannot send and receive data at the same time
+
+Switches are responsible for switching frames by using MAC addresses which are a physical address. When a switch receives the frame, the switch adds the source MAC to the switching table if it does not already exist. Then, the switch checks the table to determine whether the destination MAC is listed
+
+If the destination MAC is listed, the switch will direct the frame to the appropriate port. If it is not listed, the switch will broadcast the frame out all ports except the port it was received on
+
+Switches also have increased security options - they can filter traffic, limit the number of users who can access the switch, and create a logical segmentation of groups of hosts.
+
+Switches also provide the ability to prevent loops by using a protocol such as STP or RSTP. There can be only one active path at any given time between any two endpoints on an Ethernet network. If multiple paths between the same two endpoints exist at the same time, switching loops can occur
+
+STP activates and deactivates links dynamically to allow the network to respond to and reroute traffic around a failed link
