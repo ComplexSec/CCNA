@@ -2064,6 +2064,8 @@ VMs require a hypervisor. A hypervisor is computer software, firmware or hardwar
 2. [Understanding Switching Fundamentals](#SWITCHFUN)
 3. [Layer 2 Switches](#L2SWITCH)
 4. [Layer 2 Frame Forwarding](#L2FORWARD)
+5. [Multilayer Switch Forwarding](#MUTLIFORWARD)
+6. [Switch Physical Interface Configuration](#SPIG)
 
 ![](/images/network6.jpg)
 
@@ -2208,3 +2210,100 @@ There are four main types of switching modes:
 3. Adaptive cut-through switching
 4. FragmentFree switching
 
+__Store-And-Forward Switching__
+
+The switch receives the entire frame before forwarding the frame - the switch verifies that no cyclic redundancy check (CRC) errors are present in the frame. This helps prevent the forwarding of frames with errors. If a CRC error is detected, the frame is discarded or if the frame contains less than 64 bytes, the frame is also discarded - referred to as a RUNT
+
+Because the entire frame MUST be received before it can be forwarded, it has a higher latency than other methods. Multilayer switches MUST use the store-and-forward method because the switch MUST receive the entire frame before Network Layer operations can be performed
+
+![](/images/Module%205/10.png)
+
+__Cut-Through Switching__
+
+This method begins forwarding a frame AFTER the first six bytes - as soon as the frame's destination is received. The switch begins forwarding the frame before the frame is fully received which helps reduce latency
+
+With this method, the frame is NOT checked for errors prior to being forwarded and frames containing errors will be forwarded
+
+![](/images/Module%205/11.png)
+
+__Adaptive Cut-Through Switching__
+
+This method provides a balance between store-and-forward and cut-through switching. When this method is used, an ERROR THRESHOLD can be configured that enables the switch to take advantage of the low latency provided by cut-through switching until the configured error threshold is reached - at that point, the switch begins using the higher latency store-and-forward method
+
+When the error rate falls below the configured threshold, the switch reverts to using the cut-through switching method
+
+![](/images/Module%205/12.png)
+
+__FragmentFree Switching__
+
+Similiar to the cut-through switching method in that the switch does NOT have to receive the entire frame before forwarding. However, it waits until at least 64 bytes of the frame have been received before deciding whether to forward the frame - this allows the switch to check for collision fragments which should be detectable within the first 64 bytes
+
+If the frame is NOT a collision fragment, the switch begins forwarding the frame to the destination
+
+![](/images/Module%205/13.png)
+
+## Multilayer Switch Forwarding <a name="MUTLIFORWARD"></a> ([Back to Index](#INDEX5))
+
+A multilayer switch forwards network frames in a manner similiar to a Layer 2 switch. However, when a frame is received with a MAC that belongs to the switch, the switch uses its Routing Information Base (RIB) to make a Layer 3 forwarding decision based on the header fields of the packet encapsulated by the received frame
+
+<ins>Example</ins>
+
+Suppose HostA needs to send a packet to HostB. HostA will construct an IP packet with its own IP as the source and the IP of HostB as the destination. Because HostB is NOT in the same subnet, HostA MUST send the packet to its default gateway.
+
+HostA will construct a network frame to encapsulate the IP packet. The network frame will use the MAC of HostA as the source and MAC of default gateway (DSW1) as the destination.
+
+HostA transmits the frame to DSW1 which is a Layer 3 switch. Because the frame is addressed to DSW1, the switch de-encapsulates the IP packet and examines the destination IP. DSW1 will consult its RIB to make a forwarding decision
+
+In this secnario, DSW1 will forward the packet to DSW2. DSW1 will construct a network frame with its own MAC as the source and the MAC of DSW2 as the destination. It will encapsulate the IP packet within that frame before forwarding the frame to DSW2
+
+When DSW2 receives the frame, it will follow the same procedure that DSW1 followed. Because the frame is addressed to DSW2, it will de-encapsulate the IP packet and examine the destination IP. DSW2 will consult its RIB to make a forwarding decision. 
+
+HostB is directly connected to DSW2 so DSW2 will encapsulate the packet in a new frame with its own MAC as the source and the MAC of HostB as the destination
+
+![](/images/Module%205/14.png)
+
+<ins>How Multilayer Switches Process Frames</ins>
+
+When a multilayer switch processes frames (either L2 or L3), it MUST examine the integrity of the frame before making a forwarding decision
+
+Network frames typically have some form of integrity check to ensure that they arrive uncorrupted after transmission. Ethernet frames use a CHECKSUM value stored in the FRAME TRAILER - the checksum value is calculated by using several input values including source and destination MAC addresses
+
+If either the source MAC or destination MAC must be changed in the frame header before forwarding, the checksum MUST be recalculated. Changing frame header or trailer fields is commonly referred to as FRAME REWRITING and is necessary when a multilayer switch processes frames that require Layer 3 forwarding
+
+On a multilayer switch, the Layer 3 forwarding process follows a series of simple steps. These steps are typically implemented in Application-Specific Integrated Circuits (ASICs) to minimize the processing delay
+
+First, the Layer 2 checksum is calculated for the received frame and the value is compared to the checksum field in the frame trailer. If they match, the frame is considered intact and the Layer 3 checksum can be calculated
+
+The Layer 3 checksum is calculated by using the source and destination address in the header. In the case of IP packets, the Layer 3 checksum calculation includes the source and destination IP addresses in the packet header. If the calculated checksum value is equal to the checksum value in the packet header, the switch considers the packet intact and uses the packet header information to make a forwarding decision
+
+Once a forwarding decision is made, the multilayer switch performs a FRAME REWRITE. The switch decrements the packet TTL value by one and then encapsulates the packet in a new network frame. The new frame header uses the MAC address of the switch as the source MAC and the MAC of the next hop as destination
+
+The switch then recalculates the frame checksum based on the new addressing and places this value in the checksum field in the frame trailer. The frame is then placed in the transmit queue of the appropriate egress port and sent to the next hop
+
+![](/images/Module%205/15.png)
+
+<ins>Layer 3 Switch Planes of Operation</ins>
+
+Cisco routers and switches are divided into three logical planes of operation:
+
+1. The Management Plane
+2. The Control Plane
+3. The Data Plane
+
+__The Management Plane__
+
+The management plane is responsible for processing packets that are destined to the Layer 3 address of the device such as SSH, SNMPv3 and Syslog traffic
+
+__The Control Plane__
+
+The control plane is responsible for the creation and maintenance of structures related to routing and forwarding. These functions are heavily dependent on the CPU and memory availability. Control plane traffic is generated by dynamic routing protocols, VTP and STP
+
+__The Data Plane__
+
+The data plane is responsible for traffic passing through the device. Traffic from the data plane consists primarily of user-generated traffic that is forwarded from one interface to another - referred to as transit traffic
+
+In most network designs, data plane traffic makes up the majority of network traffic during normal operation - router and switch hardware such as SWITCHING FABRIC, ROUTE PROCESSOR MODULES and ASICs are optimized for the processing of data plane traffic
+
+![](/images/Module%205/16.png)
+
+## Switch Physical Interface Configuration <a name="SPIG"></a> ([Back to Index](#INDEX5))
