@@ -2307,3 +2307,35 @@ In most network designs, data plane traffic makes up the majority of network tra
 ![](/images/Module%205/16.png)
 
 ## Switch Physical Interface Configuration <a name="SPIG"></a> ([Back to Index](#INDEX5))
+
+A switch interface can operate in either full-duplex or half-duplex mode. Full-duplex devices can simultaneously send and receive data whereas half-duplex cannot transmit and receive at the same time
+
+Sometimes, the type of device that is connected to a switch dictates the duplex mode that should be configured. If a __HUB__ is connected to a switch interface, that interface should be configured to operate in half-duplex mode. If a __HOST__ or __SWITCH__ is connected to a switch interface, that interface should be configured in full-duplex mode
+
+To configure the duplex mode on an interface, you should issue the `duplex <full | half | auto>` command
+
+Duplex mismatches can cause intermittent connectivity problems between devices. There are three main ways to avoid duplex mismatches:
+
+1. Configure both sides of the connection to full-duplex mode
+2. Configure both sides of the connection to half-duplex mode
+3. Configure both sides of the connection to auto-negotiate
+
+The duplex-auto command configures the interface to autonegotiate the duplex settings. Auto-negotiation is available only for devices that support either the IEEE 802.3u standard or the 802.3z standard
+
+The 802.3u standard allows compliant devices to automatically communicate port speed and duplex capabilities over a 10Mb or 100Mb connection. The 802.3z standard allows gigabit devices to automatically communicate similiar information
+
+![](/images/Module%205/21.png)
+
+<ins>Configuring Interface Speed</ins>
+
+Cisco switch interfaces support multiple interface speeds:
+
+* 10Mbps
+* 100Mbps
+* 1000Mbps
+
+To configure the speed on an interface, use the `speed` command. The syntax of the speed command is `speed <10 | 100 | 1000 | auto>`. The speed values are measured in Mbps
+
+When a switch port is configured for a speed or a duplex mode that the connected NIC cannot support, the NIC will lose connectivity
+
+![](/images/Module%205/18.png)
