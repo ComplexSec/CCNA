@@ -2062,14 +2062,15 @@ VMs require a hypervisor. A hypervisor is computer software, firmware or hardwar
 
 1. [Summary](#SUMSWITCH)
 2. [Understanding Switching Fundamentals](#SWITCHFUN)
-3. [Switch Physical Interface Configuration](#INTCONFIG)
-4. [Understanding VLANs](#UNVLAN)
-5. [Common VLAN and Trunk Problems](#TRUNKPROB)
-6. [CDP AND LLDP](#CDP)
-7. [Understanding STP](#SPANTREE)
-8. [Understanding Cisco Implementations of STP](#CISTP)
-9. [Understanding EtherChannel](#CHUNKYBOI)
-10. [Review Questions](#REV5)
+3. [Layer 2 Switches](#L2SWITCH)
+4. [Switch Physical Interface Configuration](#INTCONFIG)
+5. [Understanding VLANs](#UNVLAN)
+6. [Common VLAN and Trunk Problems](#TRUNKPROB)
+7. [CDP AND LLDP](#CDP)
+8. [Understanding STP](#SPANTREE)
+9. [Understanding Cisco Implementations of STP](#CISTP)
+10. [Understanding EtherChannel](#CHUNKYBOI)
+11. [Review Questions](#REV5)
 
 ![](/images/network6.jpg)
 
@@ -2112,3 +2113,17 @@ Switches also have increased security options - they can filter traffic, limit t
 Switches also provide the ability to prevent loops by using a protocol such as STP or RSTP. There can be only one active path at any given time between any two endpoints on an Ethernet network. If multiple paths between the same two endpoints exist at the same time, switching loops can occur
 
 STP activates and deactivates links dynamically to allow the network to respond to and reroute traffic around a failed link
+
+## Layer 2 Switches <a name="L2SWITCH"></a> ([Back to Index](#INDEX5))
+
+A Layer 2 switch operates at the Data Link Layer of the OSI model - equivalent to the Network Access Layer of the TCP/IP model. When a device is described as operating at a particular layer of a networking model, it should be understood that the device actually operates at the specified layer and all lower layers
+
+When a switch receives a stream of bits from the Physical Layer, it can verify that the entire data unit has arrived safely. In an Ethernet environment, a data unit at this level is referred to as a __FRAME__. If the entire frame has arrived, the switch can check the integrity of the data by performing a calculation on the received data and comparing the result to the __Frame Check Sequence__ included in the data - if the result does NOT match the FCS, the received data is considered corrupt and is discarded
+
+If the frame has been verified, the switch can make a forwarding decision based on the destination MAC address contained in the frame's header. The switch first searches its __Content Addressable Memory (CAM)__ for an entry that matches - the CAM table provides a list of known hardware addresses and their associated ports on the switch
+
+If the frame's destination MAC adderss is NOT FOUND, the switch forwards the frame out all ports except the ingress port.  If the frame's destination MAC address IS FOUND, the switch forwards the frame to the appropriate port. If the source MAC address does not have an entry, it will be recorded in the CAM table
+
+When a device operates at a particular level of the TCP/IP model, it has access to the protocol information stored in the header and possibly the trailer of the received data unit. In the case of a Data Link Layer device, the device uses the data to make forwarding decisions and to verify the integrity but does not alter the frame
+
+![](/images/Module%205/1.png)
