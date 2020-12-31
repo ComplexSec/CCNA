@@ -2063,18 +2063,13 @@ VMs require a hypervisor. A hypervisor is computer software, firmware or hardwar
 1. [Summary](#SUMSWITCH)
 2. [Understanding Switching Fundamentals](#SWITCHFUN)
 3. [Layer 2 Switches](#L2SWITCH)
-4. [Switch Physical Interface Configuration](#INTCONFIG)
-5. [Understanding VLANs](#UNVLAN)
-6. [Common VLAN and Trunk Problems](#TRUNKPROB)
-7. [CDP AND LLDP](#CDP)
-8. [Understanding STP](#SPANTREE)
-9. [Understanding Cisco Implementations of STP](#CISTP)
-10. [Understanding EtherChannel](#CHUNKYBOI)
-11. [Review Questions](#REV5)
+4. [Layer 2 Frame Forwarding](#L2FORWARD)
 
 ![](/images/network6.jpg)
 
 ## Summary <a name="SUMSWITCH"></a> ([Back to Index](#INDEX5))
+
+![](/images/Module%205/96.png)
 
 Switches are responsible for switching frames by using a MAC address. When a switch receives a frame, the switch adds the source MAC to the CAM table if the address does not already exist so the switch knows to the port which frames are destined for that address should be sent. Then, the switch will check the CAM table to determine whether the destination MAC address is listed. If yes, the switch directs the frame to the appropriate port. If not, the switch broadcasts the frame out all ports except the ingress port
 
@@ -2127,3 +2122,89 @@ If the frame's destination MAC adderss is NOT FOUND, the switch forwards the fra
 When a device operates at a particular level of the TCP/IP model, it has access to the protocol information stored in the header and possibly the trailer of the received data unit. In the case of a Data Link Layer device, the device uses the data to make forwarding decisions and to verify the integrity but does not alter the frame
 
 ![](/images/Module%205/1.png)
+
+## Layer 2 Frame Forwarding <a name="L2FORWARD"></a> ([Back to Index](#INDEX5))
+
+When a Layer 2 switch forwards a network frame, it effectively copies the frame from a memory location on the ingress port to a memory location on the appropriate egress port - these memory locations are referred to as __QUEUES__
+
+Every port is allocated a portion of system memory that is used for transmit and receive queues. Although frames are typically described as passing through a switch, in reality the data from the frame is COPIED from one memory location to another and then converted into the appropriate signal type for the tranmission media involved
+
+For example, HostA constructs a network frame with its own MAC address as the source and the MAC of HostB as the destination. HostA then transmits the frame to a Layer 2 switch
+
+When the switch receives the frame from HostA, it examines the source MAC to ensure that HostA is associated with the port on which the frame received the frame. The switch then examines the destination MAC of the frame to make a forwarding decision
+
+If the destination MAC address is unknown, the switch forwards the frame out every other port effectively creating a copy of the frame in the transmit queue of every other egress port. When HostB responds with a frame for HostA, the switch associates the MAC of HostB with the port and copies the frame directly to the transmit queue of the port attached to HostA
+
+![](/images/Module%205/2.png)
+
+<ins>The CAM Table</ins>
+
+The CAM Table is allocated from a designated portion of system memory in a Layer 2 switch - system memory is faster than other types of memory such as NVRAM so it can facilitate rapid searches and rapid manipulation
+
+Because the CAM table is allocated a fixed amount of system memory, attempting to store more data than it can hold causes adverse behaviour
+
+The CAM table is constructed dynamically as the switch receives frames from the network. It associates source MAC addresses from network frames with the ports it was received on. An entry is created for each source MAC address, its associated ingress port and the VLAN ID with the port
+
+![](/images/Module%205/3.png)
+
+<ins>Using the CAM Table</ins>
+
+When a Layer 2 switch receives a frame on a port, the switch examines the source MAC address and creates an entry in its CAM table - an entry is retained in the CAM table for a period known as the AGING TIME
+
+When the amount of time an entry has resided in the CAM table exceeds the aging time, the entry is marked as STALE - stale entries are ignored and ultimately removed from the CAM table if the switch does not receive another frame with the same source MAC, port ID and VLAN ID
+
+A Layer 2 switch uses its CAM table to determine the appropriate egress interface for a network frame - the CAM table is indexed by the destination MAC address
+
+A switch examines the destination MAC address of a received frame and searches the CAM table for a corresponding entry. If a matching entry is found, the switch forwards the frame to the corresponding port in the CAM table - the VLAN ID of the source and destination port MUST MATCH otherwise the switch does not directly forward it. If an entry is not found, the switch will flood the frame to all ports within the VLAN identified by the source port
+
+![](/images/Module%205/4.png)
+
+<ins>Configuring the CAM Table</ins>
+
+You can issue the __show mac-address-table aging-time__ command to examine the value of the cam aging time - the default aging time depends on the hardware platform eg. the 3750 switch indicates a default aging time of 300 seconds
+
+![](/images/Module%205/5.png)
+
+You can issue the __mac-address-table aging-time__ command to modify the CAM table aging for every VLAN on a switch - the aging time of 0 disables the aging timer altogether meaning they become static and do NOT get removed from the table
+
+You can use the __vlan__ keyword to modify the aging time for a specific vlan
+
+You can use the __show mac-address-table__ command to examine the contents of the CAM table
+
+![](/images/Module%205/6.png)
+
+Alternatively, you can display specific information from the CAM table:
+
+* __show mac-address-table interface__ displays MAC addresses learned on a specific interface
+* __show mac-address-table vlan__ displays MAC addresses learned on ports with a specified VLAN
+* __show mac-address-table address__ queries the CAM table for an entry matching a specific MAC 
+
+![](/images/Module%205/7.png)
+
+<ins>The TCAM Table</ins>
+
+Cisco switches use TCAM tables to facilitate the processing of ACLs and QoS parameters. Like the CAM table, the TCAM table uses fast, system memory to mitigate delay caused by table queries. In addition, queries can be executed in parallel to further mitigate query-related delays to frame forwarding due to multiple TCAM tables
+
+Unlike CAM tables, the TCAM table space is divided into application-centric and protocol-centric regions - the regions enabled the TCAM table space to store variable-length fields that are optimized for the data being stored
+
+TCAM table regions also facilitate additional match options such as longest-match and first-match queries
+
+![](/images/Module%205/8.png)
+
+<ins>Modifying the CAM and TCAM Tables</ins>
+
+On Workgroup Class Switches, CAM and TCAM table parameters CANNOT be diretly modified - these switches provide SDM templates to reallocate system resources in predefined configurations
+
+SDM templates are designed to optimize the allocation of system resources for common workgroup switch use cases - recommended that admins explore design changes before considering the use of SDM templates to reconfigure CAM and TCAM resources beyond their defaults
+
+![](/images/Module%205/9.png)
+
+<ins>Switching Modes</ins>
+
+There are four main types of switching modes:
+
+1. Store-and-forward switching
+2. Cut-through switching
+3. Adaptive cut-through switching
+4. FragmentFree switching
+
