@@ -2069,6 +2069,7 @@ VMs require a hypervisor. A hypervisor is computer software, firmware or hardwar
 7. [Access Ports](#ACCPORTS)
 8. [Trunk Ports](#TRUNKPORTS)
 9. [Understanding and Configuring DTP](#CONFDTP)
+10. [Understanding VLANs](#UNDVLAN)
 
 ![](/images/network6.jpg)
 
@@ -2478,20 +2479,86 @@ Can also verify that a port has been configured for trunking via issuing the `sh
 
 ## Understanding and Configuring DTP <a name="CONFDTP"></a> ([Back to Index](#INDEX5))
 
+You can configure a switch port to use Dynamic Trunking Protocol (DTP) to negotiate whether the port should become access or trunk
 
+The `switchport mode <access | trunk | dynamic desirable | dynamic auto>` command configures the DTP mode for a switch port. There are two dynamic modes of operation for a switch port:
 
+1. `auto` - operates in access mode unless the neighbouring interface actively negotiates to operate as a trunk
+2. `desirable` - operates in access mode unless it can actively negotiate a trunk connection with a neighbouring interface
 
+Because a switch port in AUTO mode does NOT actively negotiate to operate in trunk mode, it will form a trunk link only if negotiations are initiated by the neighbouring interface. A neighbouring interface will initiate negotiations ONLY if it is configured to operate in trunk mode or desirable mode
 
+By contrast, a switch port in desirable mode will actively negotiate to operate in trunk mode and will form a trunk link with a neighbouring port that is configured to operate in trunk, desirable or auto mode
 
+The default dynamic mode is dependent on the hardware platform. In general, departmental switches default to auto mode whereas backbone level switches default to desirable mode
 
+You can statically configure a port to operate in access mode or trunk mode. Issuing the `switchport mode access` command will place the switch into PERMANENT access mode - it will never become a trunk port. Issuing the `switchport mode trunk` command will place the switch into PERMANENT trunk mode - if the other end is configured as a trunk port or dynamic auto/desirable, it will become a trunk link
 
+Issuing the `switchport nonegotiate` command will disable DTP for the port. A port set to nonegotiate will NOT participate in DTP negotiation, nor will the port send DTP frames
 
+Cisco recommends that you set BOTH SIDES of a trunk link to dynamic desirable when using DTP. When trunking to a non-Cisco device, you should MANUALLY configure the switch port for trunk mode
 
+![](/images/Module%205/31.png)
 
+## Understanding VLANs <a name="UNDVLAN"></a> ([Back to Index](#INDEX5))
 
+To understand the usefulness of VLANs, you need to know how a LAN works. A __LAN__ is a set of devices in a single broadcast domain. A broadcast domain is a network segment where ALL devices receive a copy of a broadcast sent out. If a broadcast domain contains 100 devices, all 100 devices will receive a copy of the broadcast
 
+Routers, which separrate one LAN from another, do NOT forward broadcasts. Each interface of a router is a separate broadcast domain. If a device that is connected to one of the router's interfaces sends a broadcast packet, it does NOT get forwarded
 
+You do NOT have to use a router to separate broadcast domains - you can also use a switch to separate broadcast domains
 
+Switches do NOT separate broadcast domains by default. All ports on the switch are part of the same broadcast domain. When a switch receives a broadcast, it forwards the broadcast out ALL ports except the port that originated the broadcast. To separate broadcast domains using a switch, you MUST use VLANs
+
+VLANs are used to create separate LANs on the same switch. This means the switch maintains a separate bridging table for each VLAN
+
+For example, the switches on the LAN below are located in separate buildings. Instead of segmenting the network by building, you can segment the network by department - put all Sales PCs into VLAN10 and all Admin PCs into VLAN20
+
+![](/images/Module%205/32.png)
+
+Broadcasts from a VLAN remain on that VLAN. Broadcasts are NOT forwarded to any other VLANs that are configured on the switch. There are two broadcast domains - VLAN 10 and VLAN 20
+
+<ins>What Do VLANs Do?</ins>
+
+VLANs provide many benefits. Network segmentation allows you to separate hosts into logical groups for easier administration and troubleshooting. VLANs also reduce the number of broadcasts that are sent and received across the network - reduces overhead for all devices because fewer broadcasts must be processed by switches/hosts
+
+Traffic remains local to the VLAN unless routed by a router or Layer 3 switch which increases security. You can prevent traffic from passing from one VLAN to another by implementing ACLs or by preventing routing between the two VLANs - routing between two VLANs is called interVLAN routing
+
+Some Cisco switches support the creation of VOICE VLANs which are used to keep voice traffic separate from data traffic. Additionally, different Quality of Service (QoS) and security policies can be maintained for each VLAN, giving administrators more granular control over the network
+
+![](/images/Module%205/33.png)
+
+<ins>VLANs and IP Addressing</ins>
+
+In the diagram below, all of the devices within the network on the left reside in the same subnet. When VLANs are used, as shown in the network on the right, you should allocate an IP subnet for EACH VLAN
+
+![](/images/Module%205/34.png)
+
+To allow VLANs to communicate with one another, a router MUST use the same method it uses to allow two LANs to communicate with one another - it MUST route the packets between the networks
+
+As stated earlier, routing packets between VLANs is called interVLAN routing. InterVLAN routing is performed by a router or a Layer 3 switch. This can be done by creating static routes or by using a dynamic routing protocol such as OSPF or EIGRP
+
+There are additional design considerations that you should take into account when you need to allocate IP ranges. To facilitate route summarization, the subnets used by the VLANs should be contiguous. If you plan to use a routing protocol that does NOT support VLSM, you should ensure that the subnet masks are similiar
+
+<ins>Creating and Configuring VLANs</ins>
+
+To create a VLAN on a switch, issue the `vlan <number>` command. The number parameter can be from 1 to 4094. VLANs 1002 through 1005 are RESERVED for Token Ring and Fiber Distributed Data Interface (FDDI)
+
+Two hidden VLANs (0 and 4095) are RESERVED for system use - these cannot be seen or deleted
+
+Issuing the `vlan <number>` command will place the switch into VLAN config mode. VLAN config commands are executed immediately in VLAN config mode. However, the configuration changes do NOT take effect until the user exist VLAN config mode
+
+A newly created VLAN will be given the name VLANxxxx where xxxx is the four digit number. To change the VLAN name, issue the `name <name>` command. The name of the VLAN can be up to 32 characters in length
+
+To remove a VLAN from the VLAN database, issue the `no vlan <number>` command
+
+You can assign an IP address to a VLAN which allows devices on the VLAN to be able to ping the switch. In addition, you can manage the switch by connecting to this IP over Telnet or SSH
+
+To configure a VLAN with an IP, first enter interface configuration mode for the VLAN - done via `interface vlan <id>` command. Then, you can configure the VLAN interface with an IP similiar to a normal interface
+
+You can verify the IP has been assigned to the VLAN via the `show interfaces vlan <id>` command
+
+![](/images/Module%205/35.png)
 
 
 
