@@ -2066,6 +2066,9 @@ VMs require a hypervisor. A hypervisor is computer software, firmware or hardwar
 4. [Layer 2 Frame Forwarding](#L2FORWARD)
 5. [Multilayer Switch Forwarding](#MUTLIFORWARD)
 6. [Switch Physical Interface Configuration](#SPIG)
+7. [Access Ports](#ACCPORTS)
+8. [Trunk Ports](#TRUNKPORTS)
+9. [Understanding and Configuring DTP](#CONFDTP)
 
 ![](/images/network6.jpg)
 
@@ -2339,3 +2342,187 @@ To configure the speed on an interface, use the `speed` command. The syntax of t
 When a switch port is configured for a speed or a duplex mode that the connected NIC cannot support, the NIC will lose connectivity
 
 ![](/images/Module%205/18.png)
+
+<ins>Verifying Basic Switch Configuration</ins>
+
+After configuring a switch, you can verify the configuration by using a combination of show commands
+
+__The show interfaces Command__
+
+You can issue the __show interfaces__ command to view infomation about the interfaces that are configured on a switch. The types of information that can be viewed by issuing the show interfaces command include:
+
+* Status of interfaces
+* IP address assigned to interfaces
+* Speed configured on interfaces
+* How many packets have been sent and received
+
+Additionally, you can view counts of how many times certain errors such as CRC errors have occurred on the interface
+
+The syntax of the show interfaces command is `show interfaces <type-number>` - the type and number parameters are optional. Using this syntax, you should issue the show interfaces f0/1 command to view information about interface FastEthernet0/1
+
+![](/images/Module%205/19.png)
+
+__The show running-config Command__
+
+The __show running-config__ command is a useful tool for verifying and troubleshooting configurations. You can issue the __show running-config__ command on a switch to view information about the current running-config. It will show:
+
+* Configuration information for all interfaces on the switch
+* Other configurable options such as VLAN info, access restrictions, banner messages and host name information
+
+![](/images/Module%205/20.png)
+
+## Access Ports <a name="ACCPORTS"></a> ([Back to Index](#INDEX5))
+
+An access port carries traffic for only ONE VLAN. An access port is usually connected to a single workstation or server. If an IP Phone is connected, you can configure an access port to carry traffic from one DATA VLAN and one VOICE VLAN
+
+![](/images/Module%205/22.png)
+
+<ins>Configuring Access Ports</ins>
+
+To configure a switch port as an access port, you should issue the `switchport mode access` command
+
+All access ports belong to VLAN 1 by default. To configure an access port to belong to a different VLAN, issue the `switchport access vlan <number>` command
+
+A VLAN Management Policy Server (VPS) can be used to dynamically map MAC addresses to VLANs. To configure a switch to use a VMPS, issue the `switchport access vlan dynamic` command
+
+![](/images/Module%205/23.png)
+
+<ins>Verifying Access Ports</ins>
+
+To verify whether a port is an access port or a trunk port, issue the `show interfaces <int> switchport` command. In the following example, the F0/1 interface is configured for dynamic auto mode and has negotiated to become an access port
+
+![](/images/Module%205/24.png)
+
+The port on the other end MUST be configured for dynamic auto or access mode. If the port at the other end of the link were set to dynamic desirable or trunk mode, F0/1 would become a trunk port
+
+<ins>Verifying VLAN Membership</ins>
+
+Use the `show vlan` command or the `show vlan brief` command to verify access ports belong to VLANs. In the sample below, the F0/1 port belongs to VLAN1, F0/2 and F0/3 belong to VLAN2 and no ports are in VLAN3
+
+![](/images/Module%205/25.png)
+
+## Trunk Ports <a name="TRUNKPORTS"></a> ([Back to Index](#INDEX5))
+
+To enable a switch port to carry traffic from multiple VLANs, you MUST enable trunking on tthe port. A trunk port typically carries traffic between switches or between a switch and a router. When trunking is enabled on a port, the trunk port carries traffic from ALL VLANs by default
+
+![](/images/Module%205/26.png)
+
+<ins>Trunk Encapsulation Methods</ins>
+
+To identify the VLAN to which a frame belongs, a TAG is added to the frame by using a trunk encapsulation method. There are two encapsulation methods that can be used to TAG VLAN traffic:
+
+1. Inter-Switch Link (ISL)
+2. 802.1Q
+
+#### Inter-Switch Link
+
+ISL is a Cisco proprietary trunking protocol that encapsulates each frame inside a 26-byte ISL header and a 4 byte CRC header. ISL is NOT supported on some of the newer Cisco switches - they support only 802.1Q standard. ISL encapsulation extends the maximum length of an Ethernet frame from 1518 bytes to 1548 bytes
+
+#### 802.1Q
+
+802.1Q is a standard-based trunking protocol developed by the IEEE. Rather than encapsulate each frame inside an 802.1Q header and trailer, 802.1Q inserts a 4-byte VLAN field into the frame's existing Ethernet header and does NOT encapsulate the original frame. 802.1Q encapsulation extends the maximum length of an Ethernet frame from 1518 bytes to 1522 bytes
+
+In addition, 802.1Q does provide support for a native VLAN whereas ISL does NOT. Each 802.1Q trunk port has exactly one native VLAN - by default, 802.1Q trunk ports use VLAN 1 as the native VLAN
+
+-----------------------------------------------------------------------------------
+
+Traffic from the native VLAN is NOT tagged. A switch will NOT insert the VLAN field into the Ethernet header of frames that belong to the native VLAN. The destination switch will recognize that any untagged frames belong to the native VLAN. Because native VLAN frames are NOT tagged, these frames can also be understood by devices that do not support 802.1Q trunking
+
+The 802.1Q encapsulation type can support multiple spanning trees and supports up to 4096 individual VLANs
+
+When configuring VLANs across multiple switches, it is important that the same VLAN ID be configured as the native VLAN for each switch in the topology. Configuring different native VLANs on switches in the same topology can result in a native VLAN mismatch when untagged traffic from one switch is sent to another
+
+A native VLAN mismatch can cause traffic that is intended for the native VLAN to be sent to an incorrect native VLAN on another switch or can cause CDP errors on switch ports
+
+In addition, all of the following MUST MATCH on each end of a trunk link:
+
+* The native VLAN ID
+* The trunking mode
+* The trunking encapsulation method
+* The VLAN IDs that are allowed on the trunk
+
+
+![](/images/Module%205/27.png)
+
+<ins>Configuring Trunk Ports</ins>
+
+Modern Cisco devices and modern versions of IOS allow the configuration of trunk ports on:
+
+* Ethernet
+* FastEthernet
+* GigabitEthernet
+
+The availability of some trunking features can depend on the device model. Some older devices might not support trunking over 10Mbps links
+
+To configure a switch port as a trunk port, you MUST first set the __trunk encapsulation method__ by issuing the `switchport trunk encapsulation <dot1q | isl | negotiate>` command
+
+The negotiate keyword configures the switch to negotiate the trunking method with the switch at the other end of the trunk link. The trunking methods MUST be the same on both ends of the trunk link
+
+After you have configured the trunk encapsulation method, you can configure the switch port for trunking. To configure a switch port as a permanent trunking port, issue the `switchport mode trunk` command
+
+You can change the native VLAN for an 802.1Q trunk port by issuing the `switchport trunk native vlan <number>` command. Native VLAN MUST match on both sides of the trunk link or spanning tree loops can occur
+
+![](/images/Module%205/28.png)
+
+<ins>Verifying Trunk Ports</ins>
+
+In the sample output below, the F0/1 interface is configured for dynamic desirable mode and has negotiated to become a trunk. The port at the other end MUST be configured for dynamic auto, dynamic desirable or trunk mode. If the port at the other end was set to access mode, F0/1 would become an access port
+
+In addition, the F0/1 interface has negotiated to use IEEE 802.1Q encapsulation. If the other end had been configured for ISL, F0/1 would also have used ISL. If the other end had been configured to negotiate encapsulation, each switch would negotiate to use the default for that model
+
+![](/images/Module%205/29.png)
+
+Can also verify that a port has been configured for trunking via issuing the `show interfaces <interface> trunk` command. This command displays information similiar to that displayed via the `show interfaces switchport` command but it also displays the VLANs that are allowed on the trunk. By default, traffic from ALL VLANs are allowed
+
+![](/images/Module%205/30.png)
+
+## Understanding and Configuring DTP <a name="CONFDTP"></a> ([Back to Index](#INDEX5))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
