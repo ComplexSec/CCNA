@@ -2070,6 +2070,7 @@ VMs require a hypervisor. A hypervisor is computer software, firmware or hardwar
 8. [Trunk Ports](#TRUNKPORTS)
 9. [Understanding and Configuring DTP](#CONFDTP)
 10. [Understanding VLANs](#UNDVLAN)
+11. [Understanding the Voice VLAN](#VOICEV)
 
 ![](/images/network6.jpg)
 
@@ -2560,14 +2561,49 @@ You can verify the IP has been assigned to the VLAN via the `show interfaces vla
 
 ![](/images/Module%205/35.png)
 
+<ins>Verifying LANs</ins>
 
+To display information about ALL VLANs configured on a switch, issue the `show vlan` command - displays VLAN name, status, ports that belong to each VLAN and several VLAN parameters
 
+To verify the creation of a new VLAN, issue the `do show vlan` command from ANY configuration mode
 
+To display a brief summary of VLANs configured on the switch, issue the `show vlan brief` command - displays VLAN name, status, ports that belong to each VLAN but does NOT display VLAN parameters
 
+To display information about a specific VLAN, issue the `show vlan id <id>` command. Alternatively, specify the VLAN by name by issuing the `show vlan name <name>` command
 
+![](/images/Module%205/36.png)
 
+## Understanding the Voice VLAN <a name="VOICEV"></a> ([Back to Index](#INDEX5))
 
+For performance purposes, voice traffic is typically separated from data traffic on a LAN. Newer Cisco switches support the creation of a voice-specific VLAN that is preconfigured to support comms with Cisco IP Phones over a voice network
 
+Voice traffic from an IP phone transits a VLAN with a default Layer 3 IP precedence value of 5 and an IEEE 802.1Q priority of 5. Several other characteristics of the voice VLAN that make it unique in its configuration
+
+CDP MUST be enabled on the interface that is being configured on the voice VLAN - it is enabled by default. If CDP is disabled, the switch will NOT be able to send configuration information to the Cisco IP Phone connected to the port
+
+The voice VLAN should be configured ONLY on access ports. Trunk ports CAN be configured with the voice VLAN but the configuration is NOT supported and will NOT produce results
+
+When the voice VLAN is configured on a port, PortFast is automatically enabled for the port. Removing the voice VLAN does NOT automatically disabled PortFast - you might need to manually disable PortFast if you repurpose the port
+
+Cisco recommends enabling QoS on the switch voice VLAN port if auto QoS is NOT operating on the switch. You can enable QoS on a switch port by issuing the trust device cisco-phone command
+
+Ports that are configured to operate on a voice VLAN can support BOTH port security and 802.1X authentication. If port security is enabled on the switch's access VLAN, dynamic port security will automatically become enabled on the voice VLAN
+
+You cannot statically configure secure MAC addresses on a voice port. Cisco recommends configuring a maximum of TWO allowed MAC addresses on a voice port. Both IP phone and any device that is connected to the access port on the IP phone have MAC addresses
+
+<ins>Configuring the Voice VLAN</ins>
+
+If QoS and CDP are enabled on a switch port, there are only TWO commands that are required to enable the voice VLAN - `switchport mode access` and `switchport voice vlan`
+
+The `switchport mode access` command puts the port into STATIC ACCESS mode. The effect of the `switchport voice vlan` command depends on the value or keyword that follows the vlan keyword - syntax of the command is `switchport voice vlan <id | dot1p | none | untagged>`
+
+If you configure the ID value when you issue the switchport voice vlan command, traffic from the connected IP phone will be forwarded on 802.1Q frames that are tagged with the VLAN ID
+
+It is possible to configure the switchport voice vlan command so that voice traffic is placed in the access VLAN instead. Issuing the `switchport voice vlan dot1p` command causes the IP phone to use 802.1p tagging with a priority of 5 instead of 802.1Q - this causes voice traffic to transit the native VLAN
+
+Configuring the `switchport voice vlan none` command on a switch port causes the IP phone to behave as if it were NOT connected to a Cisco switch. IP Phone does NOT download its configuration from the switch and uses its own configuration. Traffic from the IP phone traverses the access VLAN
+
+Configuring the `switchport voice vlan untagged` command on a switch port causes the IP phone to send untagged voice traffic which traverse the access VLAN. The same behaviour occurs if the switchport voice vlan command is NOT configured on the port. Same method that the IP phone would use if the switchport voice vlan command were NOT configured
 
 
 
